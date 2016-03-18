@@ -1,0 +1,770 @@
+<?php
+/**
+ * @file
+ * Code for the Paragraph Page Content Type feature.
+ */
+
+include_once 'paragraph_page.features.inc';
+
+/**
+ * Custom code lives below this line. This code is here to override how the
+ * heading paragraph field group thingbob works.
+ */
+
+/**
+ * Implements hook_module_implements_alter.
+ *
+ * Move the Paragraph Page module to run last, mainly for form-altering
+ * goodness.
+ *
+ * @param $implementations
+ * @param $hook
+ */
+function paragraph_page_module_implements_alter(&$implementations, $hook) {
+  if (($hook == 'form_alter') || ($hook == 'field_widget_form_alter')) {
+    // Move all hooks for this module to the end of the list. module_implements()
+    // iterates through $implementations with a foreach loop which PHP iterates
+    // in the order that the items were added, so to move an item to the end of
+    // the array, we remove it and then add it.
+    if (array_key_exists('paragraph_page', $implementations)) {
+      $group = $implementations['paragraph_page'];
+      unset($implementations['paragraph_page']);
+      $implementations['paragraph_page'] = $group;
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function paragraph_page_form_alter(&$form, &$form_state, $form_id) {
+  // On paragraph page node edit forms, require an automagic path alias and
+  // add a validate function to clean up the contents of
+  // $form_state['values']['field_parapg_url_slug'].
+  if (array_key_exists('#node_edit_form', $form) && $form['#node_edit_form']) {
+    // When we have a URL slug field, force pathauto to always run, and don't
+    // allow a custom path to be set, because the URL slug is setting the path.
+    if (array_key_exists('field_parapg_url_slug', $form)) {
+      $form['path']['pathauto']['#default_value']
+        = $form['path']['pathauto']['#value'] = TRUE;
+      $form['path']['pathauto']['#disabled'] = TRUE;
+      $form['path']['pathauto']['#description'] = t('To set the URL for this page, see the "URL Slug" field at the top of this page.');
+    }
+
+    // On node edit forms, allow the passing of a plid attribute to pre-select
+    // a menu item.
+    if (array_key_exists('menu', $form) && isset($_GET['plid'])) {
+      // Get the plid.
+      $plid = intval($_GET['plid']);
+
+      // Work out the option name from the plid. Plids are unique, but the
+      // options are prefixed with the menu name, so we need to check each
+      // option. For example, an option might be "main-menu:1234", where "1234"
+      // is the plid.
+      foreach ($form['menu']['link']['parent']['#options'] as $option => $option_name) {
+        $option_array = explode(':', $option);
+
+        if (isset($option_array[1]) && is_numeric($option_array[1]) && ($option_array[1] == $plid)) {
+          // Found the right parent - set it as default.
+          $form['menu']['link']['parent']['#default_value'] = $option;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ *
+ * @param $element
+ * @param $form_state
+ * @param $context
+ */
+function paragraph_page_field_widget_form_alter(&$element, &$form_state, $context) {
+  // Is this one of the contact information fields which are part of the
+  // field_co_cntct_contact_links field collection? We key this array by the
+  // corresponding value of the drop-down select so we can use this for the
+  // element's #states settings, later.
+  $field_co_cntct_contact_links_fields = array(
+    'email' => 'field_co_cntct_fg_email',
+    'telephone' => 'field_co_cntct_fg_tel',
+    'fax' => 'field_co_cntct_fg_tel',
+    'url' => 'field_co_cntct_fg_url',
+    'address' => 'field_co_cntct_fg_address',
+  );
+
+  if (array_key_exists('#field_name', $element)) {
+    switch ($element['#field_name']) {
+      case 'field_co_cntct_fg_email':
+        $element_for_editing = &$element['email'];
+        break;
+
+      case 'field_co_cntct_fg_url':
+      case 'field_co_cntct_fg_address':
+        $element_for_editing = &$element['value'];
+        break;
+    }
+  }
+  // Case to handle the telfield of doom.
+  elseif (array_key_exists('value', $element)
+    && isset($element['value']['#field_name'])
+    && ($element['value']['#field_name'] == 'field_co_cntct_fg_tel')) {
+    $element_for_editing = &$element['value'];
+  }
+
+  if (isset($element_for_editing)) {
+    // We need to add some Javascript states to this field.
+
+    // This element's name might be something like:
+    // field_parapg_paragraphs[und][0][field_co_cntct_contact_links][und][0][field_co_cntct_fg_email][und][0][email]
+    // field_parapg_paragraphs[und][0][field_co_cntct_contact_links][und][0][field_co_cntct_fg_tel][und][0][value]
+    // field_parapg_paragraphs[und][0][field_co_cntct_contact_links][und][0][field_co_cntct_fg_url][und][0][url]
+    // field_parapg_paragraphs[und][0][field_co_cntct_contact_links][und][0][field_co_cntct_fg_address][und][0][value]
+    // ...
+    // field_parapg_paragraphs[und][0][field_co_cntct_contact_links][und][2][field_co_cntct_fg_address][und][0][value]
+    //
+    // We get this element's name by taking each of $element_for_editing['#field_parents'],
+    // wrapping the second and subsequent elements' values in square brackets,
+    // and then adding the field's Drupal name in brackets, followed by the
+    // path down to the field's value element in the field's render array.
+    // Drupal Forms? I hate you :)
+
+    // Determine the name of the drop-down which will determine whether this
+    // field is visible or not. For example:
+    // field_parapg_paragraphs[und][0][field_co_cntct_contact_links][und][3][field_co_cntct_fg_type][und]
+    $field_co_cntct_fg_type_name = array_shift($element_for_editing['#field_parents']);
+
+    if (count($element_for_editing['#field_parents'])) {
+      $field_co_cntct_fg_type_name .= '[' . implode('][', $element_for_editing['#field_parents']) . ']';
+    }
+
+    // Now we need an array containing the drop-down select field's name, plus
+    // the path to its value.
+    $field_co_cntct_fg_type_keys = array(
+      'field_co_cntct_fg_type',
+      $element_for_editing['#language'],
+    );
+
+    $field_co_cntct_fg_type_name .= '[' . implode('][', $field_co_cntct_fg_type_keys) . ']';
+
+    // We need to get the value of the drop-down which should show this field.
+    $this_select_values = array();
+    foreach ($field_co_cntct_contact_links_fields as $select_value => $field_name) {
+      if ($element_for_editing['#field_name'] == $field_name) {
+        $this_select_values[] = $select_value;
+      }
+    }
+
+    // Now we know the name of the drop-down field which will affect this
+    // field's visibility, we can set its state.
+    if (!isset($element_for_editing['#states'])) {
+      $element_for_editing['#states'] = array(
+        'visible' => array(':input[name="' . $field_co_cntct_fg_type_name . '"]' => array()),
+        'required' => array(':input[name="' . $field_co_cntct_fg_type_name . '"]' => array()),
+      );
+    }
+
+    foreach ($this_select_values as $this_select_value) {
+      $element_for_editing['#states']['visible'][':input[name="' . $field_co_cntct_fg_type_name . '"]'][] = array('value' => $this_select_value);
+      $element_for_editing['#states']['required'][':input[name="' . $field_co_cntct_fg_type_name . '"]'][] = array('value' => $this_select_value);
+    }
+
+    // Add the Google Maps JS so we don't suffer from a "google is undefined"
+    // error if we add a Paragraph to a node edit page which didn't previously
+    // have a GMap on it. Code shamelessly stolen from google_map_field.module.
+    // @TODO: only include this once.
+    $head_element = array(
+      '#type' => 'markup',
+      '#markup' => '<script type="text/javascript" src="//maps.googleapis.com/maps/api/js?sensor=false&key=' . variable_get('google_map_field_apikey', '') . '"></script>',
+    );
+    drupal_add_html_head($head_element, 'google_maps_api');
+  }
+
+  // Be careful to only fire this alteration when we're on a node edit form.
+  // Is this the field_parapg_node_type field on the node edit form?
+  if (array_key_exists('#entity_type', $context['form'])
+    && ($context['form']['#entity_type'] == 'node')
+    && array_key_exists('#field_name', $element)
+    && ($element['#field_name'] == 'field_parapg_node_type')
+  ) {
+    $element['value']['#type'] = 'checkboxes';
+    $element['value']['#default_value'] = array();
+    unset($element['value']['#maxlength']);
+
+    // Unset the '#required' flag; otherwise, the form's validation function
+    // will throw an error because it tries to check for an empty string.
+    $element['value']['#required'] = FALSE;
+
+    $element['value']['#description'] .= ' <em>' . t('(If no checkboxes are checked, all types of content will be shown.') . '</em>';
+
+    // Get a list of node types.
+    $types = array();
+    foreach (node_type_get_types() as $node_type => $node_info) {
+      $types[$node_type] = $node_info->name;
+    }
+
+    $element['value']['#options'] = $types;
+
+    // Explode the default value on + into an array of defaults.
+    $default_value = $element['value']['#default_value'];
+    if (is_string($default_value) && !empty($default_value)) {
+      $element['value']['#default_value'] = (array) explode('+', $element['value']['#default_value']);
+    }
+
+    $element['value']['#element_validate'][] = 'paragraph_page_field_parapg_node_type_element_validate';
+  }
+}
+
+/**
+ * Field validation callback: convert the field_parapg_node_type field's array
+ * values into a string.
+ *
+ * The difficulty here is that the value of the field is stored in a nested
+ * location within the $form_state['values'] array; in fact, there could
+ * theoretically be more than one instance of this value, since I could add two,
+ * three, ... n instances of a paragraph field with a node listing in it.
+ *
+ * So, for each instance where this validation function is called, we need to
+ * get the location of the field from the $element['#field_parents'] array,
+ * which contains data such as:
+ *
+ *  $element['#field_parents'] = array(
+ *    0 => 'field_parapg_paragraphs',   // i.e. the field which contains Paragraphs
+ *                                      // elements.
+ *    1 => 'und',                       // The language variant for this field;
+ *                                      // we can get this from
+ *                                      // $element['#language'] if needed.
+ *    2 => 9,                           // i.e. The 9th child element.
+ *  );
+ *
+ * Now, we know that the value we want to change is located at
+ * $form_state['values'][$element['#field_parents'][0]][$element['#field_parents'][1]][$element['#field_parents'][2]],
+ * but how to we programmatically get down to that value, and alter it, in a way
+ * that will persist when the function exits and passes $form_state back by
+ * reference?
+ *
+ * The solution we're going to use here is to create a recursive function into
+ * which we'll pass the $form_state array, or a child of that array, along with
+ * part or all of the #field_parents array, and the new value for the element.
+ *
+ * So, let's give this a go...
+ *
+ * @param $element
+ * @param $form_state
+ */
+function paragraph_page_field_parapg_node_type_element_validate($element, &$form_state, $form) {
+  // Call our recursive function of awesomeness, which will fix up this
+  // element's value.
+  $form_state['values'] = _paragraph_page_field_parapg_node_type_element_validate($form_state['values'], $element['#field_parents'], $element, '_paragraph_page_field_parapg_node_type_element_validate_convert_to_string');
+
+  // Reset our FAPI field back to its textfield settings.
+  $element['value']['#type'] = 'textfield';
+  $element['value']['#maxlength'] = 255;
+  $element['value']['#default_value'] = '';
+  unset($element['value']['#options']);
+}
+
+/**
+ * Locates and changes a deeply-nested $form_state['values'] array element.
+ *
+ * This is a recursive function which drills down into a $form_state['values']
+ * array to find and change a nested field value. This function is called from
+ * an #element_validate function call.
+ *
+ * @param $form_state_values       array On first call, this is the entire
+ *                                 $form_state['values'] array; on subsequent
+ *                                 calls, this array contains a subset of the
+ *                                 values array.
+ *
+ * @param $element_field_parents   array An indexed array of the value's parents.
+ *
+ * @param $element                 array The original $element as passed in to the parent
+ *                                 validation function.
+ *
+ * @param $function_call           string The name of the processing function to call when
+ *                                 the value element is found. This function should
+ *                                 accept the value array and the parent $element
+ *                                 as arguments - in that order - and should return
+ *                                 the new value, which may be an array, string,
+ *                                 etc.
+ *
+ * @return mixed
+ */
+function _paragraph_page_field_parapg_node_type_element_validate($form_state_values, $element_field_parents, $element, $function_call) {
+  // If $element_field_parents is an array and contains exactly one element,
+  // then we are at the bottom level and can set the new value on the element;
+  // otherwise, we remove the first key/value pair off the front of the
+  // $element_field_parents array and use the value of the sliced key to pass
+  // a sub-array from $form_state_values back into this function.
+  if (count($element_field_parents) == 1) {
+    // We're at the bottom level; set
+    // $form_state_values[$element_field_parents[0]] = $new_value and return
+    // $form_state_values.
+    if (isset($form_state_values[$element_field_parents[0]],
+      $form_state_values[$element_field_parents[0]][$element['#field_name']])) {
+      $form_state_values[$element_field_parents[0]][$element['#field_name']] = call_user_func($function_call, $form_state_values[$element_field_parents[0]][$element['#field_name']], $element);
+    }
+    else {
+      // Show an error but don't prevent the form from saving; we might still
+      // be able to continue.
+      $message_text = '@function: Unable to locate the @element array key.';
+      $message_array = array(
+        '@function' => __FUNCTION__,
+        '@element' => $element_field_parents[0],
+      );
+      drupal_set_message(t($message_text, $message_array), 'warning');
+      watchdog('paragraph_page', $message_text, $message_array, WATCHDOG_WARNING);
+    }
+  }
+  else {
+    $child_array_key = array_shift($element_field_parents);
+
+    if (array_key_exists($child_array_key, $form_state_values)) {
+      $form_state_values[$child_array_key] = _paragraph_page_field_parapg_node_type_element_validate($form_state_values[$child_array_key], $element_field_parents, $element, $function_call);
+    }
+    else {
+      // Show an error but don't prevent the form from saving; we might still
+      // be able to continue.
+      $message_text = '@function: Unable to locate the @element array key.';
+      $message_array = array(
+        '@function' => __FUNCTION__,
+        '@element' => $child_array_key,
+      );
+      drupal_set_message(t($message_text, $message_array), 'warning');
+      watchdog('paragraph_page', $message_text, $message_array, WATCHDOG_WARNING);
+    }
+  }
+
+  // Lastly, return the updated $form_state_values array.
+  return $form_state_values;
+}
+
+/**
+ * Callback function used by _paragraph_page_field_parapg_node_type_element_validate
+ * to convert various types of fields values from one to the other.
+ *
+ * Currently, this function only converts an array of checked values from a
+ * Drupal Form API Checkboxes element into a string compatible with a textfield
+ * field.
+ *
+ * @param $value_to_convert
+ * @param $element
+ *
+ * @return array
+ */
+function _paragraph_page_field_parapg_node_type_element_validate_convert_to_string($value_to_convert, $element) {
+  // Set a default return value.
+  $return_value = $value_to_convert;
+
+  switch ($element['#field_name']) {
+    case 'field_parapg_node_type':
+      /**
+       * We're expecting an array structured like this:
+       *
+       *  array(
+       *    '[language code]' => array(
+       *      0 => array(
+       *        'value' => array(
+       *          'job_vacancy' => 'job_vacancy', // i.e. this field is ticked.
+       *          'article' => 0,                 // i.e. this field isn't.
+       *        ),
+       *      ),
+       *    ),
+       *  );
+       *
+       * It should have only one value array (the array identified by 0).
+       */
+
+      // Get the element's value's language code. Most elements will use this,
+      // but not necessarily all.
+      $language_code = $element['#language'];
+
+      // Pre-set up the node types string.
+      $checked_node_types_concatenated = '';
+
+      // Make sure the value contains all the arrays we need it to.
+      if (isset($value_to_convert, $value_to_convert[$language_code],
+        $value_to_convert[$language_code][0],
+        $value_to_convert[$language_code][0]['value'])) {
+        $checked_node_types = array();
+
+        if (is_array($value_to_convert[$language_code][0]['value'])) {
+          foreach ($value_to_convert[$language_code][0]['value'] as $key => $value) {
+            if ($key === $value) {
+              $checked_node_types[$key] = $value;
+            }
+          }
+
+          // Concatenate our node types into a string.
+          $checked_node_types_concatenated = implode('+', $checked_node_types);
+        }
+      }
+
+      // Set up a new value array which is compatible with the textfield field
+      // type.
+      $return_value = array(
+        $language_code => array(
+          0 => array(
+            'value' => $checked_node_types_concatenated,
+          ),
+        ),
+      );
+
+      break;
+  }
+
+  return $return_value;
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function paragraph_page_menu_alter(&$items) {
+  // Hide the Basic Page node/add link.
+  if (array_key_exists('node/add/page', $items)) {
+    $items['node/add/page']['hidden'] = TRUE;
+    $items['node/add/page']['page callback'] = 'paragraph_page_redirect_to_add_paragraph_page';
+    $items['node/add/page']['include file'] = '';
+  }
+}
+
+/**
+ * Redirect a content editor to the paragraphs page add screen.
+ */
+function paragraph_page_redirect_to_add_paragraph_page() {
+  drupal_goto('node/add/paragraph-page');
+}
+
+/**
+ * Implements hook_theme().
+ */
+function paragraph_page_theme() {
+  $theme = array();
+
+  $theme['paragraphs_item__page_title'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--page-title',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__heading_and_jump_link'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--heading-and-jump-link',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__large_quote_intro_text'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--large-quote-intro-text',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__back_to_top_link'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--back-to-top-link',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__images'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--images',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__address'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--address',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__e_mail_address'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--e-mail-address',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__google_map'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--google-map',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__side_by_side_image_and_text'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--side-by-side-image-and-text',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__telephone_number'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--telephone-number',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__youtube_video'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--youtube-video',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__file_downloads'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--file-downloads',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__page_promo_banner'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--page-promo-banner',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__child_pages_listing'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--child-pages-listing',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__soundcloud_player'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--soundcloud-player',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__node_reference'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--node-reference',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__links_list'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--links-list',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__horizontal_line'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--horizontal-line',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__image_carousel'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--image-carousel',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__two_three_or_four_column_wysiwyg'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--two-three-or-four-column-wysiwyg',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__views_paragraph'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--views-paragraph',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__customisable_content_listing'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--customisable-content-listing',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['paragraphs_item__company_contact_info'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--company-contact-info',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  $theme['node__paragraph_page'] = array(
+    'render element' => 'content',
+    'base hook' => 'node',
+    'template' => 'node--paragraph-page',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
+  return $theme;
+}
+
+/**
+ * Custom theme implementation to override the views mini pager for the custom
+ * content view only.
+ *
+ * @see https://www.drupal.org/node/552074#comment-2732724
+ *
+ * @param $vars
+ *
+ * @return string
+ * @throws \Exception
+ */
+//function theme_views_mini_pager__paragraphs_list_of_content($vars) {
+//  global $pager_page_array, $pager_total;
+//
+//  $tags = $vars['tags'];
+//  $element = $vars['element'];
+//  $parameters = $vars['parameters'];
+//
+//  // current is the page we are currently paged to
+//  $pager_current = $pager_page_array[$element] + 1;
+//  // max is the maximum page number
+//  $pager_max = $pager_total[$element];
+//  // End of marker calculations.
+//
+//  if ($pager_total[$element] > 1) {
+//
+//    $li_previous = theme('pager_previous',
+//      array(
+//        'text' => (isset($tags[1]) ? $tags[1] : t('‹‹')) . 'monkey',
+//        'element' => $element,
+//        'interval' => 1,
+//        'parameters' => $parameters,
+//      )
+//    );
+//    if (empty($li_previous)) {
+//      $li_previous = "&nbsp;";
+//    }
+//
+//    $li_next = theme('pager_next',
+//      array(
+//        'text' => 'monkey' . (isset($tags[3]) ? $tags[3] : t('››')),
+//        'element' => $element,
+//        'interval' => 1,
+//        'parameters' => $parameters,
+//      )
+//    );
+//
+//    if (empty($li_next)) {
+//      $li_next = "&nbsp;";
+//    }
+//
+//    $items[] = array(
+//      'class' => array('pager-previous'),
+//      'data' => $li_previous,
+//    );
+//
+//    $items[] = array(
+//      'class' => array('pager-current'),
+//      'data' => t('@current of @max', array(
+//        '@current' => $pager_current,
+//        '@max' => $pager_max,
+//      )),
+//    );
+//
+//    $items[] = array(
+//      'class' => array('pager-next'),
+//      'data' => $li_next,
+//    );
+//
+//    return theme('item_list',
+//      array(
+//        'items' => $items,
+//        'title' => NULL,
+//        'type' => 'ul',
+//        'attributes' => array('class' => array('pager')),
+//      )
+//    );
+//  }
+//}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function paragraph_page_preprocess_node(&$variables) {
+  // Are we on a paragraph page node?
+  if ($variables['node']->type == 'paragraph_page') {
+    // Build the list of links, if there is one.
+    $links = array();
+
+    // Convenience variable, read/writeable.
+    $content = &$variables['content'];
+
+    // Loop through all paragraphs and find any which are headings.
+    if (isset($content['field_parapg_paragraphs'])
+      && !empty($content['field_parapg_paragraphs'])
+    ) {
+      foreach (element_children($content['field_parapg_paragraphs']) as $paragraph_number => $paragraph_entity_key) {
+        // Get the paragraph entity as a variable.
+        $paragraph_entity = $content['field_parapg_paragraphs'][$paragraph_entity_key];
+
+        // Get the paragraphs item array key value.
+        reset($paragraph_entity['entity']['paragraphs_item']);
+        $first_key = key($paragraph_entity['entity']['paragraphs_item']);
+
+        // Get the paragraph.
+        $paragraph = $paragraph_entity['entity']['paragraphs_item'][$first_key];
+
+        if ($paragraph['#bundle'] == 'heading_and_jump_link') {
+          // Found a heading. Is field_paragraph_jump_link_shown 1?
+          // ['field_parapg_paragraphs'][0]['entity']['paragraphs_item'][6]['field_paragraph_jump_link_shown']['#items'][0]['value']
+          if (isset($paragraph['field_paragraph_jump_link_shown'])
+            && ($paragraph['field_paragraph_jump_link_shown']['#items'][0]['value'] == 1)
+            && !empty($paragraph['field_paragraph_jump_link_slug']['#items'][0]['value'])
+          ) {
+            // Yes - make a link and add it in. ps So much faff to get a value!
+            // Perhaps we should have been using field_get_items() here?
+            $links[] = l($paragraph['field_paragraph_heading']['#items'][0]['safe_value'], '',
+              array(
+                'fragment' => $paragraph['field_paragraph_jump_link_slug']['#items'][0]['value'],
+                'external' => TRUE,
+                // HTML true because safe value might be escaped.
+                'html' => TRUE,
+              ));
+          }
+        }
+      }
+    }
+
+    if (!empty($links)) {
+      $variables['content']['jump_links'] = array(
+        '#prefix' => '<div class="jump-links-container">',
+        '#theme' => 'item_list',
+        '#items' => $links,
+        '#type' => 'ul',
+        '#attributes' => array('class' => 'jump-links'),
+        '#title' => t('Jump to...'),
+        '#suffix' => '</div>',
+      );
+    }
+
+    // Don't show the page title.
+    unset($variables['title']);
+  }
+}
+
+/**
+ * Implements hook_preprocess_page.
+ *
+ * @param $variables
+ */
+function paragraph_page_preprocess_page(&$variables) {
+  // Are we viewing a paragraph page?
+  if ((arg(0) == 'node') && is_numeric(arg(1))) {
+    if ($node = node_load(arg(1))) {
+      if ($node->type == 'paragraph_page') {
+        $variables['title'] = '';
+      }
+    }
+  }
+}
+
+/**
+ * Implements template_preprocess_paragraphs_items.
+ *
+ * @param $variables
+ * @param $hook
+ */
+function paragraph_page_preprocess_paragraphs_items(&$variables, $hook) {
+  // Add the module's CSS on pages where we're displaying a paragraph.
+  // @TODO: check whether we need to prevent duplicate calls to add this CSS file to the page if more than one paragraph page node is rendered on a page call.
+  drupal_add_css(drupal_get_path('module', 'paragraph_page') . '/css/paragraph-page.css');
+  drupal_add_js(drupal_get_path('module', 'paragraph_page') . '/js/paragraph-page.js');
+}
+
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function paragraph_page_theme_registry_alter(&$theme_registry) {
+}

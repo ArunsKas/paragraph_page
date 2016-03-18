@@ -1,0 +1,674 @@
+/**
+ * Styles for the Paragraph Page module.
+ */
+
+/* For Bootstrap theme, allow paragraphs to expand to the width of the page. */
+body.container-may-be-fluid:before,
+body.container-may-be-fluid:after {
+  content: " ";
+  display: table;
+}
+
+body.container-may-be-fluid:after {
+  clear: both;
+}
+
+/*  On pages which aren't paragraph pages or node edit pages, set
+    .container-may-be-fluid to be .container - i.e. fixed width. */
+body:not(.node-type-paragraph-page):not(.page-node-edit):not(.page-node-add) .main-container.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (min-width: 768px) {
+  body:not(.node-type-paragraph-page):not(.page-node-edit):not(.page-node-add) .main-container.container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  body:not(.node-type-paragraph-page):not(.page-node-edit):not(.page-node-add) .main-container.container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  body:not(.node-type-paragraph-page):not(.page-node-edit):not(.page-node-add) .main-container.container {
+    width: 1170px;
+  }
+}
+
+body:not(.node-type-paragraph-page):not(.page-node-edit):not(.page-node-add) .main-container.container > .navbar-header,
+body:not(.node-type-paragraph-page):not(.page-node-edit):not(.page-node-add) .main-container.container > .navbar-collapse {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+@media (min-width: 768px) {
+  body:not(.node-type-paragraph-page):not(.page-node-edit):not(.page-node-add) .main-container.container > .navbar-header,
+  body:not(.node-type-paragraph-page):not(.page-node-edit):not(.page-node-add) .main-container.container > .navbar-collapse {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+body.node-type-paragraph-page .main-container.container,
+body.page-node-add .main-container.container,
+body.page-node-edit .main-container.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+}
+
+/*  If Bootstrap has figured out the page only has one column, we will have a
+    section with a class of col-md-12 (probably...) - remove the padding so our
+    para page can go full-width. */
+body.node-type-paragraph-page .main-container.container > .row > section.col-md-12,
+body.page-node-add .main-container.container > .row > section.col-md-12,
+body.page-node-edit .main-container.container > .row > section.col-md-12 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/*  Don't allow containers inside a reduced-width paragraphs node to explode out
+    of their parents. */
+body.node-type-paragraph-page .main-container.container .node-paragraph-page .container,
+body.page-node-add .main-container.container .node-paragraph-page .container,
+body.page-node-edit .main-container.container .node-paragraph-page .container {
+  width: 100%;
+}
+
+body.node-type-paragraph-page .main-container.container > .navbar-header,
+body.page-node-add .main-container.container > .navbar-header,
+body.page-node-edit .main-container.container > .navbar-header,
+body.node-type-paragraph-page .main-container.container > .navbar-collapse,
+body.page-node-add .main-container.container > .navbar-collapse,
+body.page-node-edit .main-container.container > .navbar-collapse {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+@media (min-width: 768px) {
+  body.node-type-paragraph-page .main-container.container > .navbar-header,
+  body.page-node-add .main-container.container > .navbar-header,
+  body.page-node-edit .main-container.container > .navbar-header,
+  body.node-type-paragraph-page .main-container.container > .navbar-collapse,
+  body.page-node-add .main-container.container > .navbar-collapse,
+  body.page-node-edit .main-container.container > .navbar-collapse {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+/* Pad the edge of the node edit form a little. */
+body.page-node-add .main-container.container,
+body.page-node-edit .main-container.container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media screen and (min-width: 768px) {
+  body.page-node-add .main-container.container,
+  body.page-node-edit .main-container.container {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+/* Don't pad in the edges of the col-xx-12 classes. */
+body.node-type-paragraph-page .main-container.container > section.col-sm-12,
+body.node-type-paragraph-page .main-container.container > section.col-md-12,
+body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Clear the paragraph elephants and space them. */
+.paragraphs-items,
+.paragraphs-item {
+  clear: both;
+  margin: 2em 0;
+}
+
+/* Fix for inconsistent line heights of DOOOOOOM. */
+.paragraphs-items,
+.paragraphs-items * {
+  line-height: initial;
+}
+
+/* Removed - don't stripe the page. Let clients do that if they want. */
+/*.field-name-field-parapg-paragraphs .field-item:nth-child(odd) .paragraphs-item {*/
+/*background-color: #f8f8f8;*/
+/*}*/
+
+.paragraphs-item {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Clearfix the paragraphs items. */
+.paragraphs-item::before,
+.paragraphs-item::after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+
+.paragraphs-item::after {
+  clear: both;
+}
+
+.paragraphs-item::before,
+.paragraphs-item::after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+
+.paragraphs-item::after {
+  clear: both;
+}
+
+/* Center the jump links. */
+.jump-links-container {
+  padding: 0 0 1em 0;
+  border-bottom: #efefef 1px solid;
+  margin: 1em 0;
+  text-align: center;
+}
+
+/* Make the jump links title display inline. */
+.jump-links-container h3 {
+  display: inline-block;
+  font-size: 1.2em;
+  margin: 0;
+  padding: 0;
+  color: #888;
+}
+
+/* Make the jump links into an inline-block list. Add any further styling to
+   your theme please. */
+.jump-links-container ul {
+  margin: 0 0 0 1em;
+  padding: 0;
+  text-align: center;
+  display: inline-block;
+}
+
+.jump-links-container ul li {
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+}
+
+.jump-links-container ul li a {
+  font-size: 1.1em;
+  margin: 0 0.5em 0.25em 0;
+  /*border: #aaa 1px solid;*/
+  padding: 0.25em 0.5em;
+  display: inline-block;
+  color: #fff;
+  background-color: #888;
+}
+
+.jump-links-container ul li a:hover {
+  text-decoration: none;
+  background-color: #666;
+}
+
+/* Allow Google Maps to expand to full-width. */
+.google_map_field_display {
+  height: 300px;
+  width: 100%;
+}
+
+/* Don't pad in the edges of side-by-side blocks. */
+.paragraphs-item.paragraphs-item--side-by-side-image-text,
+.paragraphs-item.paragraphs-item--email-address,
+.paragraphs-item.paragraphs-item--telephone-number,
+.paragraphs-item.paragraphs-item--google-map {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Center addresses, e-mail addresses and phone numbers which don't have name
+   labels. */
+.paragraphs-item .address-without-name,
+.paragraphs-item .email-address-without-name,
+.paragraphs-item .telephone-without-name {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.paragraphs-item .address-without-name .address-content,
+.paragraphs-item .email-address-without-name .email-address-content,
+.paragraphs-item .telephone-without-name .telephone-number {
+  display: inline-block;
+}
+
+.paragraphs-item .address-content .field,
+.paragraphs-item .email-address-content .field,
+.paragraphs-item .telephone-number .field {
+  font-size: 1.5em;
+  /*margin: 0;*/
+}
+
+.paragraphs-item .address-name h3,
+.paragraphs-item .email-address-name h3,
+.paragraphs-item .telephone-name h3 {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  color: #888;
+  font-size: 1.5em;
+  text-align: right;
+}
+
+/* Promo banner styles. */
+
+/* No background colour or padding on full-width promo images. */
+.paragraphs-item.paragraphs-item--page-promo-banner {
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: transparent;
+}
+
+/* We want the banner image container to expand to full-width. */
+.paragraphs-item--page-promo-banner {
+  /*margin-left: -999em;*/
+  /*margin-right: -999em;*/
+  padding: 0;
+}
+
+.paragraphs-item--page-promo-banner .paragraphs-item--page-promo-banner-inside {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.paragraphs-item--page-promo-banner img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  /*position: absolute;*/
+  /*top: 0;*/
+  /*right: 0;*/
+  /*bottom: 0;*/
+  /*left: 0;*/
+}
+
+.paragraphs-item--page-promo-banner .text-overlay-inner {
+  padding: 0.75em;
+}
+
+.paragraphs-item--page-promo-banner .text-overlay-2-col {
+}
+
+.paragraphs-item--page-promo-banner .text-overlay-3-col {
+}
+
+/* Black text on white background. */
+.paragraphs-item--page-promo-banner .text-colour-black {
+  background-color: rgba(255, 255, 255, 0.9)
+}
+
+.paragraphs-item--page-promo-banner .text-colour-black,
+.paragraphs-item--page-promo-banner .text-colour-black a {
+  color: #555;
+}
+
+.paragraphs-item--page-promo-banner .text-colour-black .text-overlay-inner {
+  border: #555 2px solid;
+}
+
+/* White text on ... you know the rest of this old tune :) */
+.paragraphs-item--page-promo-banner .text-colour-white {
+  background-color: rgba(0, 0, 0, 0.8)
+}
+
+.paragraphs-item--page-promo-banner .text-colour-white,
+.paragraphs-item--page-promo-banner .text-colour-white a {
+  color: #fff;
+}
+
+.paragraphs-item--page-promo-banner .text-colour-white .text-overlay-inner {
+  border: #fff 2px solid;
+}
+
+.paragraphs-item--page-promo-banner a:hover {
+  text-decoration: none;
+}
+
+.paragraphs-item--page-promo-banner h2,
+.paragraphs-item--page-promo-banner p {
+  margin: 0 0 0.25em 0;
+}
+
+.paragraphs-item--page-promo-banner .text-overlays-container {
+  /*margin: 1em 0;*/
+}
+
+.paragraphs-item--page-promo-banner .text-overlay {
+  position: relative;
+  padding: 0.75em;
+}
+
+.paragraphs-item--page-promo-banner .text {
+  margin: 1em;
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.paragraphs-item--page-promo-banner a:hover {
+  text-decoration: none;
+}
+
+.paragraphs-item--page-promo-banner h2,
+.paragraphs-item--page-promo-banner p {
+  margin: 0.25em 0;
+}
+
+.paragraphs-item--page-promo-banner h2 {
+  font-size: 1.75em;
+}
+
+.paragraphs-item--page-promo-banner p {
+  font-size: 1em;
+}
+
+/* Responsive styles. */
+@media (min-width: 768px) {
+  .paragraphs-item--page-promo-banner .text-overlay.text-colour-black {
+    -webkit-box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.5);
+  }
+
+  .paragraphs-item--page-promo-banner .text-overlay.text-colour-white {
+    -webkit-box-shadow: 0 10px 10px -5px rgba(255, 255, 255, 0.5);
+    -moz-box-shadow: 0 10px 10px -5px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 10px 10px -5px rgba(255, 255, 255, 0.5);
+  }
+
+  .paragraphs-item--page-promo-banner .text-overlays-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    /*background-color: pink;*/
+  }
+
+  /* Overlays - 1, 2 or 3 per row. */
+  .paragraphs-item--page-promo-banner .text-overlay {
+    position: absolute;
+    top: 15%;
+    bottom: 15%;
+  }
+
+  .paragraphs-item--page-promo-banner .text-overlay-inner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0.75em;
+  }
+
+  .paragraphs-item--page-promo-banner .text-overlay-1-col {
+    left: 30%;
+    right: 30%;
+  }
+
+  .paragraphs-item--page-promo-banner .overlay-1-of-2 {
+    left: 10%;
+    right: 52.5%;
+  }
+
+  .paragraphs-item--page-promo-banner .overlay-2-of-2 {
+    left: 52.5%;
+    right: 10%;
+  }
+
+  .paragraphs-item--page-promo-banner .overlay-1-of-3 {
+    left: 5%;
+    right: 69%;
+  }
+
+  .paragraphs-item--page-promo-banner .overlay-2-of-3 {
+    left: 36%;
+    right: 36%;
+  }
+
+  .paragraphs-item--page-promo-banner .overlay-3-of-3 {
+    left: 69%;
+    right: 5%;
+  }
+
+  .paragraphs-item--page-promo-banner .text {
+    margin: 1em;
+    text-align: center;
+
+    position: absolute;
+    top: 45%;
+    transform: translateY(-50%);
+    right: 0;
+    left: 0;
+  }
+}
+
+@media (min-width: 960px) {
+  .paragraphs-item--page-promo-banner .text {
+    font-size: 1em;
+  }
+}
+
+/* Manbo specific styles - @TODO: move into manbo LESS files. */
+.paragraphs-item--page-promo-banner h2 {
+  padding-bottom: 1em;
+  margin: 0;
+  position: relative;
+}
+
+.paragraphs-item--page-promo-banner .text-colour-white h2,
+.paragraphs-item--page-promo-banner .text-colour-white h2 a,
+.paragraphs-item--page-promo-banner .text-colour-black h2,
+.paragraphs-item--page-promo-banner .text-colour-black h2 a {
+  color: #ff3cc1;
+}
+
+.paragraphs-item--page-promo-banner h2:after {
+  content: "";
+  background: #ff3cc1;
+  position: absolute;
+  bottom: 0.5em;
+  left: 40%;
+  right: 40%;
+  height: 3px;
+}
+
+/* End Manbo specific styles - @TODO: move into manbo LESS files. */
+
+/* Youtube videos - centre them. */
+.paragraphs-item--youtube-video {
+  text-align: center;
+}
+
+.paragraphs-item--youtube-video .field-name-field-parapg-youtube-video-url {
+  display: inline-block;
+}
+
+/* Child pages listings. */
+.paragraphs-item--child-pages-listing {
+}
+
+.paragraphs-item--child-pages-listing h3.child-pages-listing-title {
+  margin-top: 0;
+}
+
+/* Carousels. */
+.paragraphs-item--image-carousel .carousel-control {
+  opacity: 0.9;
+  filter: alpha(opacity=90);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.9);
+}
+
+.paragraphs-item--image-carousel .carousel-control:hover {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+.paragraphs-item--image-carousel .carousel-control.left,
+.paragraphs-item--image-carousel .carousel-control.right {
+  background-image: none;
+}
+
+.paragraphs-item--image-carousel .carousel-control .glyphicon {
+  font-size: 2em;
+}
+
+/*  On full-width carousels, bring the arrows inwards; on constrained carousels,
+    push them outwards. Caution: this may be stupid. */
+.paragraphs-item--image-carousel .container .carousel-control .glyphicon-chevron-left {
+  left: -10px;
+}
+
+.paragraphs-item--image-carousel .container .carousel-control .glyphicon-chevron-right {
+  right: 5px;
+}
+
+.paragraphs-item--image-carousel .container-fluid .carousel-control .glyphicon-chevron-left {
+  left: auto;
+  right: 5px;
+}
+
+.paragraphs-item--image-carousel .container-fluid .carousel-control .glyphicon-chevron-right {
+  right: auto;
+  left: -10px;
+}
+
+/*  On fixed-width carousels, on desktop-and-larger viewports, position the
+    controls to the sides of the slides. */
+@media (min-width: 960px) {
+  .paragraphs-item--image-carousel .container .carousel-control.left {
+    left: -60px;
+  }
+
+  .paragraphs-item--image-carousel .container .carousel-control.right {
+    right: -50px;
+  }
+
+  .paragraphs-item--image-carousel .carousel-control .glyphicon {
+    font-size: 3em;
+  }
+}
+
+/* Bloomin' inline elephants... */
+.paragraphs-item--image-carousel .carousel-inner > .item > span,
+.paragraphs-item--image-carousel .carousel-inner > .item > a {
+  display: block;
+  text-align: center;
+}
+
+/* More-specific classes to override the default Bootstrap class structure. */
+.paragraphs-item--image-carousel .carousel-inner > .item > span > img.carousel-mobile-image,
+.paragraphs-item--image-carousel .carousel-inner > .item > a > img.carousel-mobile-image {
+  display: inline-block;
+}
+
+.paragraphs-item--image-carousel .carousel-inner > .item > span > img.carousel-desktop-image,
+.paragraphs-item--image-carousel .carousel-inner > .item > a > img.carousel-desktop-image {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .paragraphs-item--image-carousel .carousel-inner > .item > span > img.carousel-mobile-image,
+  .paragraphs-item--image-carousel .carousel-inner > .item > a > img.carousel-mobile-image {
+    display: none;
+  }
+
+  .paragraphs-item--image-carousel .carousel-inner > .item > span > img.carousel-desktop-image,
+  .paragraphs-item--image-carousel .carousel-inner > .item > a > img.carousel-desktop-image {
+    display: inline-block;
+  }
+}
+
+.paragraphs-item--image-carousel .carousel-caption {
+  padding-bottom: 25px;
+}
+
+@media (min-width: 768px) {
+  .paragraphs-item--image-carousel .carousel-caption {
+    padding-bottom: 40px;
+  }
+}
+
+.paragraphs-item--image-carousel .carousel-caption,
+.paragraphs-item--image-carousel .carousel-caption h2,
+.paragraphs-item--image-carousel .carousel-caption p,
+.paragraphs-item--image-carousel .carousel-caption a {
+  color: #fff;
+  font-weight: normal;
+}
+
+.paragraphs-item--image-carousel .carousel-caption a:hover {
+  text-decoration: none;
+}
+
+/* /Carousels. */
+
+/* Google Map paragraphs. */
+.paragraphs-item.paragraphs-item--google-map .google-map-field-label {
+  margin: 1em 0 0.5em 0;
+  font-size: 1.5em;
+  color: #666;
+  font-weight: normal;
+}
+
+/* /Google Map paragraphs. */
+
+/* Company contact paragraphs. */
+.paragraphs-item.paragraphs-item--company-contact-info h3 {
+  margin-top: 0;
+  font-weight: normal;
+}
+
+.paragraphs-item.paragraphs-item--company-contact-info ul.contact-links {
+  list-style: none;
+  padding-left: 0;
+}
+
+.paragraphs-item.paragraphs-item--company-contact-info li.contact-link {
+  padding: 0 0 0.25em 0;
+  border-bottom: #efefef 1px dotted;
+  margin: 0 0 0.25em 0;
+}
+
+.paragraphs-item.paragraphs-item--company-contact-info li.contact-link:last-child {
+  padding-bottom: 0;
+  border-bottom-width: 0;
+  margin-bottom: 0;
+}
+
+.paragraphs-item.paragraphs-item--company-contact-info .contact-link-type-email span.contact-link-title,
+.paragraphs-item.paragraphs-item--company-contact-info .contact-link-type-address span.contact-link-title,
+.paragraphs-item.paragraphs-item--company-contact-info .contact-link-type-email span.contact-link,
+.paragraphs-item.paragraphs-item--company-contact-info .contact-link-type-address span.contact-link {
+  display: block;
+}
+
+.paragraphs-item.paragraphs-item--company-contact-info span.contact-link-title {
+  font-size: 0.9em;
+  color: #888;
+  font-weight: bold;
+}

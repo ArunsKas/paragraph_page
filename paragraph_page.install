@@ -1,0 +1,69 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Paragraph Page module.
+ */
+
+//hook_requirements
+
+//hook_schema
+
+//hook_install
+
+//hook_uninstall
+
+//hook_enable
+
+//hook_disable
+
+/**
+ * If jQuery version for either main site or admin section is below 1.7, set to
+ * 1.7 to allow GMaps to work
+ */
+function paragraph_page_update_7001() {
+  // If this is 'default' or '1.5', we need to change to 1.7.
+  $current_jquery_main_version = variable_get('jquery_update_jquery_version', 'default');
+  if (in_array($current_jquery_main_version, array('default', '1.5'))) {
+    variable_set('jquery_update_jquery_version', '1.7');
+  }
+
+  // If this is NULL, 'default', or '1.5', we need to change to 1.7.
+  $current_jquery_admin_version = variable_get('jquery_update_jquery_admin_version', NULL);
+  if (in_array($current_jquery_admin_version, array(NULL, 'default', '1.5'))) {
+    variable_set('jquery_update_jquery_admin_version', '1.7');
+  }
+}
+
+/**
+ * Empty update of doom.
+ */
+function paragraph_page_update_7002() {
+}
+
+/**
+ * Empty update of doom.
+ */
+function paragraph_page_update_7003() {
+}
+
+/**
+ * Delete orphaned fields from the Paragraphs Page module.
+ */
+function paragraph_page_update_7004() {
+  $field_instances_to_delete = array(
+    'field_paragraph_link_to_page',
+    'field_paragraph_title',
+    'field_paragraph_subtitle',
+    'field_paragraph_text_colour',
+  );
+
+  foreach ($field_instances_to_delete as $field_instance_to_delete) {
+    if ($instance = field_info_instance('paragraphs_item', $field_instance_to_delete, 'page_promo_banner')) {
+      field_delete_instance($instance);
+    }
+
+    // Also run the purge now.
+    field_purge_batch(1);
+  }
+}
