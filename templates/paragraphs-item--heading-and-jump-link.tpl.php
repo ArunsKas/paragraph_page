@@ -23,6 +23,7 @@ if (isset($content['field_paragraph_jump_link_slug'],
       <div class="col-md-12">
         <a name="<?php print $jump_link_slug ?>"></a>
         <<?php print $heading_level ?> class="paragraphs-title"><?php print $heading ?></<?php print $heading_level ?>>
+      </div>
     </div>
   </div>
 </div>

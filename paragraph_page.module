@@ -561,6 +561,12 @@ function paragraph_page_theme() {
     'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
   );
 
+  $theme['paragraphs_item__wysiwyg'] = array(
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--wysiwyg',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  );
+
   $theme['paragraphs_item__views_paragraph'] = array(
     'render element' => 'elements',
     'template' => 'paragraphs-item--views-paragraph',
