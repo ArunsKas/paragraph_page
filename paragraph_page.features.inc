@@ -342,6 +342,11 @@ function paragraph_page_paragraphs_info() {
       'bundle' => 'images',
       'locked' => '1',
     ),
+    'key_dates' => array(
+      'name' => 'Key dates',
+      'bundle' => 'key_dates',
+      'locked' => '1',
+    ),
     'large_quote_intro_text' => array(
       'name' => 'Large quote/intro text',
       'bundle' => 'large_quote_intro_text',
@@ -360,6 +365,11 @@ function paragraph_page_paragraphs_info() {
     'page_promo_banner' => array(
       'name' => 'Full-width image with one, two or three text boxes overlaid',
       'bundle' => 'page_promo_banner',
+      'locked' => '1',
+    ),
+    'promo_with_image' => array(
+      'name' => 'Promo blocks with images',
+      'bundle' => 'promo_with_image',
       'locked' => '1',
     ),
     'side_by_side_image_and_text' => array(

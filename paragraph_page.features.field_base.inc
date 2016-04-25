@@ -341,6 +341,85 @@ function paragraph_page_field_default_field_bases() {
     'type' => 'google_map_field',
   );
 
+  // Exported field_base: 'field_event_icon'.
+  $field_bases['field_event_icon'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_event_icon',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        'calendar' => 'Calendar',
+        'star-o' => 'Star - outline',
+        'star' => 'Start - solid',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_text',
+  );
+
+  // Exported field_base: 'field_event_title'.
+  $field_bases['field_event_title'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_event_title',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
+  // Exported field_base: 'field_key_date'.
+  $field_bases['field_key_date'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_key_date',
+    'global_block_settings' => 1,
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'date',
+    'settings' => array(
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'granularity' => array(
+        'day' => 'day',
+        'hour' => 0,
+        'minute' => 0,
+        'month' => 'month',
+        'second' => 0,
+        'year' => 'year',
+      ),
+      'timezone_db' => '',
+      'todate' => '',
+      'tz_handling' => 'none',
+    ),
+    'translatable' => 0,
+    'type' => 'datetime',
+  );
+
   // Exported field_base: 'field_page_to_display'.
   $field_bases['field_page_to_display'] = array(
     'active' => 1,
@@ -531,6 +610,29 @@ function paragraph_page_field_default_field_bases() {
     'type' => 'text',
   );
 
+  // Exported field_base: 'field_paragraph_key_date'.
+  $field_bases['field_paragraph_key_date'] = array(
+    'active' => 1,
+    'cardinality' => 3,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_paragraph_key_date',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'revision_id' => array(
+        0 => 'revision_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'field_collection',
+    'settings' => array(
+      'hide_blank_items' => 1,
+      'path' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'field_collection',
+  );
+
   // Exported field_base: 'field_paragraph_link_to_page'.
   $field_bases['field_paragraph_link_to_page'] = array(
     'active' => 1,
@@ -561,6 +663,28 @@ function paragraph_page_field_default_field_bases() {
     'type' => 'link_field',
   );
 
+  // Exported field_base: 'field_paragraph_promo_category'.
+  $field_bases['field_paragraph_promo_category'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_paragraph_promo_category',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 255,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
+  );
+
   // Exported field_base: 'field_paragraph_promo_image'.
   $field_bases['field_paragraph_promo_image'] = array(
     'active' => 1,
@@ -582,6 +706,58 @@ function paragraph_page_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'image',
+  );
+
+  // Exported field_base: 'field_paragraph_promo_link'.
+  $field_bases['field_paragraph_promo_link'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_paragraph_promo_link',
+    'global_block_settings' => 1,
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'link',
+    'settings' => array(
+      'attributes' => array(
+        'class' => '',
+        'rel' => '',
+        'target' => 'default',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 1,
+      'title' => 'optional',
+      'title_maxlength' => 128,
+      'title_value' => '',
+      'url' => 0,
+    ),
+    'translatable' => 0,
+    'type' => 'link_field',
+  );
+
+  // Exported field_base: 'field_paragraph_promo_text'.
+  $field_bases['field_paragraph_promo_text'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_paragraph_promo_text',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'format' => array(
+        0 => 'format',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'text',
+    'settings' => array(
+      'max_length' => 500,
+    ),
+    'translatable' => 0,
+    'type' => 'text',
   );
 
   // Exported field_base: 'field_paragraph_style'.
@@ -671,6 +847,8 @@ function paragraph_page_field_default_field_bases() {
       'allowed_values' => array(
         'white' => 'White text on dark background',
         'black' => 'Black text on light background',
+        'pink' => 'Pink with light background',
+        'blue' => 'Blue with light background',
       ),
       'allowed_values_function' => '',
     ),
@@ -1676,6 +1854,29 @@ function paragraph_page_field_default_field_bases() {
     'settings' => array(),
     'translatable' => 0,
     'type' => 'video_embed_field',
+  );
+
+  // Exported field_base: 'field_parapragh_promo_block'.
+  $field_bases['field_parapragh_promo_block'] = array(
+    'active' => 1,
+    'cardinality' => 3,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_parapragh_promo_block',
+    'global_block_settings' => 1,
+    'indexes' => array(
+      'revision_id' => array(
+        0 => 'revision_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'field_collection',
+    'settings' => array(
+      'hide_blank_items' => 1,
+      'path' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'field_collection',
   );
 
   // Exported field_base: 'field_soundcloud_url'.
