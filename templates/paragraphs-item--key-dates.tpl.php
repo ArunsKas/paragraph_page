@@ -60,11 +60,13 @@ foreach (element_children($content['field_paragraph_key_date']) as $field_paragr
       <ol>
         <?php foreach ($field_paragraph_key_dates as $field_paragraph_key_date): ?>
           <li class="key-date">
+            <span class="circle left"></span>
             <?php print $field_paragraph_key_date['icon']; ?>
             <div>
               <?php print $field_paragraph_key_date['title']; ?>
               <?php print $field_paragraph_key_date['date']; ?>
             </div>
+            <span class="circle right"></span>
           </li>
         <?php endforeach ?>
       </ol>

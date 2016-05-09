@@ -62,6 +62,55 @@ if (count($field_paragraph_text_overlays) > 0) {
   $text_overlay_container_class = 'text-overlay-' . count($field_paragraph_text_overlays) . '-col';
 }
 
+
+
+// Add the backlist navigation item if we are on a backlist page
+$args = arg();
+if ($args[1] == 'backlist') {
+  $current_year = $args[2];
+
+  $prize_year_vocab = array();
+  //$prize_year_vocab = taxonomy_get_tree(9);
+  $all_years = array();
+  $results = array();
+
+  if($args[0] == 'international') {
+    $results = views_get_view_result('manbosamjo_prizes', 'entityreference_4');
+  } elseif($args[0] == 'fiction') {
+    $results = views_get_view_result('manbosamjo_prizes', 'entityreference_3');
+  }
+
+  foreach ($results as $result) {
+    $prize_year_vocab[] = $result->field_field_prize_prize_year[0]['raw']['taxonomy_term'];
+  }
+
+  foreach ($prize_year_vocab as $key => $year) {
+    // build options
+    if($current_year == $year->name) {
+      $next_year = $year->name + 1;
+      $prev_year = $year->name - 1;
+      $all_years[] = "<option value='/international/backlist/" . $year->name . "' selected>" . $year->name . "</option>";
+    } else {
+      $all_years[] = "<option value='/international/backlist/" . $year->name . "'>" . $year->name . "</option>";
+    }
+  }
+
+  $last_year = $prize_year_vocab[0];
+  $first_year = end($prize_year_vocab);
+
+  if ($prev_year < $first_year->name) {
+    $prev_year = null;
+  }
+
+  if ($next_year > $last_year->name) {
+    $next_year = null;
+  }
+
+  $prev_year;
+  $next_year;
+  $all_years;
+}
+
 ?>
 
 <div class="paragraphs-item paragraphs-item--page-promo-banner">
@@ -77,6 +126,43 @@ if (count($field_paragraph_text_overlays) > 0) {
               <div class="text">
                 <?php print $field_paragraph_text_overlay['title'] ?>
                 <?php print $field_paragraph_text_overlay['subtitle'] ?>
+                <?php if($args[1] == 'backlist'): ?>
+                  <div class="backlist-navigation">
+                    <?php if ($prev_year != null): ?>
+                      <div class="previous">
+                        <a href="/international/backlist/<?php print $prev_year; ?>">
+                          <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                        </a>
+                      </div>
+                    <?php else: ?>
+                      <div class="previous">
+                        <span class="disabled">
+                          <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
+                        </span>
+                      </div>
+                    <?php endif; ?>
+
+                    <select class="form-control form-select" onChange="window.location.href=this.value">
+                      <?php foreach($all_years as $key => $option): ?>
+                        <?php print $option; ?>
+                      <?php endforeach; ?>
+                    </select>
+
+                    <?php if ($next_year != null): ?>
+                      <div class="next">
+                        <a href="/international/backlist/<?php print $next_year; ?>">
+                          <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                        </a>
+                      </div>
+                    <?php else: ?>
+                      <div class="next">
+                        <span class="disabled">
+                          <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                        </span>
+                      </div>
+                    <?php endif; ?>
+                  </div>
+                <?php endif; ?>
               </div>
             </div>
           </div>

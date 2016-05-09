@@ -45,10 +45,10 @@ function paragraph_page_form_alter(&$form, &$form_state, $form_id) {
     // When we have a URL slug field, force pathauto to always run, and don't
     // allow a custom path to be set, because the URL slug is setting the path.
     if (array_key_exists('field_parapg_url_slug', $form)) {
-      $form['path']['pathauto']['#default_value']
-        = $form['path']['pathauto']['#value'] = TRUE;
-      $form['path']['pathauto']['#disabled'] = TRUE;
-      $form['path']['pathauto']['#description'] = t('To set the URL for this page, see the "URL Slug" field at the top of this page.');
+      //$form['path']['pathauto']['#default_value']
+      //  = $form['path']['pathauto']['#value'] = TRUE;
+      //$form['path']['pathauto']['#disabled'] = TRUE;
+      //$form['path']['pathauto']['#description'] = t('To set the URL for this page, see the "URL Slug" field at the top of this page.');
     }
 
     // On node edit forms, allow the passing of a plid attribute to pre-select
