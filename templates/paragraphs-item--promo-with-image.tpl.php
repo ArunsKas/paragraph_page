@@ -57,7 +57,7 @@ foreach (element_children($content['field_parapragh_promo_block']) as $field_par
 ?>
 
 <div class="container pg-label">
-  <h6>You may also like:</h6>
+  <h6><?php print t('You may also like:') ?></h6>
 </div>
 
 <div class="paragraphs-item paragraphs-item--promo-with-image">
