@@ -150,6 +150,7 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
   margin-left: auto;
   padding-left: 15px;
   padding-right: 15px;
+  font-size: 1.25em;
 }
 
 /* Clearfix the paragraphs items. */
