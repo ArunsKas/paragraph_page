@@ -104,6 +104,21 @@ function paragraph_page_image_default_styles() {
     ),
   );
 
+  // Exported image style: paragraph-scale-crop-300x300.
+  $styles['paragraph-scale-crop-300x300'] = array(
+    'label' => 'Paragraph - scale and crop 300x300',
+    'effects' => array(
+      1 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 300,
+          'height' => 300,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: paragraph_carousel_1200x600.
   $styles['paragraph_carousel_1200x600'] = array(
     'label' => 'Paragraph carousel - fit within 1200x600',

@@ -210,6 +210,7 @@ features[image][] = paragraph-fit-within-1200x1200
 features[image][] = paragraph-fit-within-600x600
 features[image][] = paragraph-promo-image-non-retina
 features[image][] = paragraph-promo-image-retina
+features[image][] = paragraph-scale-crop-300x300
 features[image][] = paragraph_carousel_1200x600
 features[image][] = paragraph_carousel_600x600
 features[image][] = paragraph_promo_image_16to9
