@@ -2865,7 +2865,7 @@ function paragraph_page_field_default_field_instances() {
           'colorbox_gallery_custom' => '',
           'colorbox_image_style' => 'paragraph-fit-within-1200x1200',
           'colorbox_multivalue_index' => NULL,
-          'colorbox_node_style' => 'paragraph-fit-within-600x600',
+          'colorbox_node_style' => 'paragraph-scale-crop-300x300',
           'colorbox_node_style_first' => '',
         ),
         'type' => 'colorbox',
@@ -2930,7 +2930,7 @@ function paragraph_page_field_default_field_instances() {
     'description' => 'Provide an optional caption to display below the images.',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
