@@ -8,7 +8,7 @@
 $columns = $content['field_parapg_columns']['#items'][0]['value'];
 
 // Set the column class.
-$column_class = 'col-md-' . (12 / $columns);
+$column_class = 'col-sm-' . (12 / $columns);
 
 ?>
 
