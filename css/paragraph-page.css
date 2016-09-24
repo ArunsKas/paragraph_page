@@ -716,3 +716,15 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
 .paragraphs-item .paragraphs-item--images-caption figcaption {
   margin-top: 1em;
 }
+
+/* Image galleries. */
+/*!* Hide all except first and second. *!*/
+.paragraphs-item.paragraphs-item--images .paragraphs-item--image a {
+  border: #efefef 1px solid;
+  padding: 0.5em;
+  display: inline-block;
+}
+
+.paragraphs-item.paragraphs-item--images .paragraphs-item--image a:hover {
+  border-color: #cfcfcf;
+}
