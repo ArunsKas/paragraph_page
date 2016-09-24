@@ -337,6 +337,20 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
   border: #555 2px solid;
 }
 
+/* Blue text on white background. */
+.paragraphs-item--page-promo-banner .text-colour-blue {
+  background-color: rgba(255, 255, 255, 0.9)
+}
+
+.paragraphs-item--page-promo-banner .text-colour-blue,
+.paragraphs-item--page-promo-banner .text-colour-blue a {
+  color: #2266ff;
+}
+
+.paragraphs-item--page-promo-banner .text-colour-blue .text-overlay-inner {
+  border: #fff 2px solid;
+}
+
 /* White text on ... you know the rest of this old tune :) */
 .paragraphs-item--page-promo-banner .text-colour-white {
   background-color: rgba(0, 0, 0, 0.8)
