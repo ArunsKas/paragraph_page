@@ -216,13 +216,12 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
   /*border: #aaa 1px solid;*/
   padding: 0.25em 0.5em;
   display: inline-block;
-  color: #fff;
-  background-color: #888;
+  /*color: #444;*/
 }
 
 .jump-links-container ul li a:hover {
-  text-decoration: none;
-  background-color: #666;
+  text-decoration: underline;
+  /*color: #000;*/
 }
 
 /* Allow Google Maps to expand to full-width. */
@@ -324,31 +323,43 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
 }
 
 /* Black text on white background. */
+.paragraphs-item--page-promo-banner .text-colour-pink,
+.paragraphs-item--page-promo-banner .text-colour-blue,
 .paragraphs-item--page-promo-banner .text-colour-black {
   background-color: rgba(255, 255, 255, 0.9)
 }
 
-.paragraphs-item--page-promo-banner .text-colour-black,
-.paragraphs-item--page-promo-banner .text-colour-black a {
+.paragraphs-item--page-promo-banner .text-colour-black {
   color: #555;
 }
 
+.paragraphs-item--page-promo-banner .text-colour-pink .text-overlay-inner {
+  border: #ff3cc1 2px solid;
+}
+
+.paragraphs-item--page-promo-banner .text-colour-blue .text-overlay-inner {
+  border: #2266ff 2px solid;
+}
+
 .paragraphs-item--page-promo-banner .text-colour-black .text-overlay-inner {
-  border: #555 2px solid;
+  border: #fff 2px solid;
+}
+
+/* Pink text on white background. */
+.paragraphs-item--page-promo-banner .text-colour-pink,
+.paragraphs-item--page-promo-banner .text-colour-pink a {
+  color: #ff3cc1;
 }
 
 /* Blue text on white background. */
-.paragraphs-item--page-promo-banner .text-colour-blue {
-  background-color: rgba(255, 255, 255, 0.9)
-}
-
 .paragraphs-item--page-promo-banner .text-colour-blue,
 .paragraphs-item--page-promo-banner .text-colour-blue a {
   color: #2266ff;
 }
 
-.paragraphs-item--page-promo-banner .text-colour-blue .text-overlay-inner {
-  border: #fff 2px solid;
+.paragraphs-item--page-promo-banner .text-colour-pink a,
+.paragraphs-item--page-promo-banner .text-colour-blue a {
+  text-decoration: underline;
 }
 
 /* White text on ... you know the rest of this old tune :) */
@@ -408,6 +419,8 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
 
 /* Responsive styles. */
 @media (min-width: 768px) {
+  .paragraphs-item--page-promo-banner .text-overlay.text-colour-pink,
+  .paragraphs-item--page-promo-banner .text-overlay.text-colour-blue,
   .paragraphs-item--page-promo-banner .text-overlay.text-colour-black {
     -webkit-box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.5);
     -moz-box-shadow: 0 10px 10px -5px rgba(0, 0, 0, 0.5);
@@ -493,7 +506,6 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
   }
 }
 
-/* Manbo specific styles - @TODO: move into manbo LESS files. */
 .paragraphs-item--page-promo-banner h2 {
   padding-bottom: 1em;
   margin: 0;
@@ -501,15 +513,18 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
 }
 
 .paragraphs-item--page-promo-banner .text-colour-white h2,
-.paragraphs-item--page-promo-banner .text-colour-white h2 a,
-.paragraphs-item--page-promo-banner .text-colour-black h2,
-.paragraphs-item--page-promo-banner .text-colour-black h2 a {
-  color: #ff3cc1;
+.paragraphs-item--page-promo-banner .text-colour-white h2 a {
+  color: #fff;
+}
+
+.paragraphs-item--page-promo-banner .text-colour-white h2 a {
+  color: #fff;
+  text-decoration: underline;
 }
 
 .paragraphs-item--page-promo-banner h2:after {
   content: "";
-  background: #ff3cc1;
+  background-color: #ccc;
   position: absolute;
   bottom: 0.5em;
   left: 40%;
@@ -517,7 +532,21 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
   height: 3px;
 }
 
-/* End Manbo specific styles - @TODO: move into manbo LESS files. */
+.paragraphs-item--page-promo-banner .text-colour-white h2:after {
+  background-color: #fff;
+}
+
+.paragraphs-item--page-promo-banner .text-colour-pink h2:after {
+  background-color: #ff3cc1;
+}
+
+.paragraphs-item--page-promo-banner .text-colour-blue h2:after {
+  background-color: #2266ff;
+}
+
+.paragraphs-item--page-promo-banner .text-colour-black h2:after {
+  background-color: #fff;
+}
 
 /* Youtube videos - centre them. */
 .paragraphs-item--youtube-video {
@@ -728,3 +757,8 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
 .paragraphs-item.paragraphs-item--images .paragraphs-item--image a:hover {
   border-color: #cfcfcf;
 }
+
+/*.paragraphs-item.paragraphs-item--images .field-item:nth-child(1),*/
+/*.paragraphs-item.paragraphs-item--images .field-item:nth-child(2) {*/
+/*display: block;*/
+/*}*/
