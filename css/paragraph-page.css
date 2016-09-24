@@ -262,6 +262,11 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
   /*margin: 0;*/
 }
 
+.paragraphs-item .telephone-with-name .field.field-name-field-parapg-phone-number,
+.paragraphs-item .email-address-content .field.field-name-field-parapg-email-address {
+  margin: 0.6em 0 0 0;
+}
+
 .paragraphs-item .address-name h3,
 .paragraphs-item .email-address-name h3,
 .paragraphs-item .telephone-name h3 {
