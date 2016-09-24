@@ -701,12 +701,18 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
 }
 
 /* Caption styles for videos, audio, images, etc. */
+.paragraphs-item .paragraphs-item--images-caption figcaption,
 .paragraphs-item .video-embed-description {
-  margin: 0 0 0.5em 0;
-  padding: 0.5em 0;
   border: 0;
-  border-bottom: #efefef 1px solid;
-  color: #888;
-  font-size: 0.8em;
   text-align: left;
+  background-color: #eee;
+  padding: 1em;
+  font-size: 1em;
+  margin: 0 0 1em 0;
+  font-style: italic;
+  color: #666;
+}
+
+.paragraphs-item .paragraphs-item--images-caption figcaption {
+  margin-top: 1em;
 }
