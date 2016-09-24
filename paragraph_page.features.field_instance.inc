@@ -2944,29 +2944,22 @@ function paragraph_page_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'paragraphs_item',
+    'fences_wrapper' => 'figcaption',
     'field_name' => 'field_paragraphs_caption',
     'label' => 'Below-images caption',
     'required' => 0,
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'filtered_html' => 'filtered_html',
           'full_html' => 'full_html',
-          'php_code' => 'php_code',
           'plain_text' => 'plain_text',
         ),
         'allowed_formats_toggle' => 0,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
-            'filtered_html' => array(
-              'weight' => 0,
-            ),
             'full_html' => array(
               'weight' => 1,
-            ),
-            'php_code' => array(
-              'weight' => 11,
             ),
             'plain_text' => array(
               'weight' => 10,
