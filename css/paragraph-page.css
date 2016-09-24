@@ -432,8 +432,8 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
   /* Overlays - 1, 2 or 3 per row. */
   .paragraphs-item--page-promo-banner .text-overlay {
     position: absolute;
-    top: 15%;
-    bottom: 15%;
+    top: 25%;
+    bottom: 25%;
   }
 
   .paragraphs-item--page-promo-banner .text-overlay-inner {
