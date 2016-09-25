@@ -596,14 +596,22 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
   right: 5px;
 }
 
+.glyphicon-chevron-right:before,
+.paragraphs-item--image-carousel .container .carousel-control .glyphicon-chevron-right:before {
+  position: absolute;
+  right: 0;
+}
+
 .paragraphs-item--image-carousel .container-fluid .carousel-control .glyphicon-chevron-left {
-  left: auto;
-  right: 5px;
+  left: 0px;
+  right: initial;
+  margin-left: 0;
 }
 
 .paragraphs-item--image-carousel .container-fluid .carousel-control .glyphicon-chevron-right {
-  right: auto;
-  left: -10px;
+  right: 0px;
+  left: initial;
+  margin-right: 0;
 }
 
 /*  On fixed-width carousels, on desktop-and-larger viewports, position the
