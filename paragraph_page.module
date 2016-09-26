@@ -750,7 +750,7 @@ function paragraph_page_preprocess_node(&$variables) {
     
     if (!empty($links)) {
       $variables['content']['jump_links'] = array(
-        '#prefix' => '<div class="jump-links-container">',
+        '#prefix' => '<div class="stickyscroll-anchor"></div><div class="stickyscroll-element jump-links-container" data-below-element="header#navbar">',
         '#theme' => 'item_list',
         '#items' => $links,
         '#type' => 'ul',
