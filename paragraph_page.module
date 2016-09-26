@@ -755,7 +755,7 @@ function paragraph_page_preprocess_node(&$variables) {
         '#items' => $links,
         '#type' => 'ul',
         '#attributes' => array('class' => 'jump-links'),
-        '#title' => t('Jump to...'),
+        '#title' => t('On this page:'),
         '#suffix' => '</div>',
       );
     }
