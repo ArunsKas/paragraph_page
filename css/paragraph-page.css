@@ -261,13 +261,6 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
   display: inline-block;
 }
 
-.paragraphs-item .address-content .field,
-.paragraphs-item .email-address-content .field,
-.paragraphs-item .telephone-number .field {
-  font-size: 1.5em;
-  /*margin: 0;*/
-}
-
 .paragraphs-item .telephone-with-name .field.field-name-field-parapg-phone-number,
 .paragraphs-item .email-address-content .field.field-name-field-parapg-email-address {
   margin: 0.6em 0 0 0;
@@ -280,8 +273,27 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
   padding: 0;
   font-weight: normal;
   color: #888;
-  font-size: 1.5em;
   text-align: right;
+}
+
+.paragraphs-item .address-name h3,
+.paragraphs-item .email-address-name h3,
+.paragraphs-item .telephone-name h3,
+.paragraphs-item .address-content .field,
+.paragraphs-item .email-address-content .field,
+.paragraphs-item .telephone-number .field {
+  font-size: 1em;
+}
+
+@media (min-width: 768px) {
+  .paragraphs-item .address-name h3,
+  .paragraphs-item .email-address-name h3,
+  .paragraphs-item .telephone-name h3,
+  .paragraphs-item .address-content .field,
+  .paragraphs-item .email-address-content .field,
+  .paragraphs-item .telephone-number .field {
+    font-size: 1.5em;
+  }
 }
 
 /* Promo banner styles. */
@@ -573,6 +585,14 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
 }
 
 /* Carousels. */
+
+/* Make sure the carousel images can expand to full-width if we're using
+   .container-fluid. */
+.paragraphs-item.paragraphs-item--image-carousel {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
 .paragraphs-item--image-carousel .carousel-control {
   opacity: 0.9;
   filter: alpha(opacity=90);
