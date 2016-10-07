@@ -697,7 +697,7 @@ function paragraph_page_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'paragraph_carousel_2340x1700',
+          'image_style' => 'paragraph_carousel_2340x1170',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -727,7 +727,7 @@ function paragraph_page_field_default_field_instances() {
       'active' => 1,
       'module' => 'image',
       'settings' => array(
-        'preview_image_style' => 'paragraph_carousel_2340x1700',
+        'preview_image_style' => 'paragraph_carousel_2340x1170',
         'progress_indicator' => 'throbber',
       ),
       'type' => 'image_image',

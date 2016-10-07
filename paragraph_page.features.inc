@@ -119,9 +119,9 @@ function paragraph_page_image_default_styles() {
     ),
   );
 
-  // Exported image style: paragraph_carousel_2340x1700.
-  $styles['paragraph_carousel_2340x1700'] = array(
-    'label' => 'Paragraph carousel - fit within 1200x600',
+  // Exported image style: paragraph_carousel_2340x1170.
+  $styles['paragraph_carousel_2340x1170'] = array(
+    'label' => 'Paragraph carousel - fit within 2340x1170',
     'effects' => array(
       12 => array(
         'name' => 'image_scale',
@@ -137,7 +137,7 @@ function paragraph_page_image_default_styles() {
 
   // Exported image style: paragraph_carousel_1200x1200.
   $styles['paragraph_carousel_1200x1200'] = array(
-    'label' => 'Paragraph carousel - fit within 600x600',
+    'label' => 'Paragraph carousel - fit within 1200x1200',
     'effects' => array(
       14 => array(
         'name' => 'image_scale',
