@@ -119,15 +119,15 @@ function paragraph_page_image_default_styles() {
     ),
   );
 
-  // Exported image style: paragraph_carousel_1200x600.
-  $styles['paragraph_carousel_1200x600'] = array(
-    'label' => 'Paragraph carousel - fit within 1200x600',
+  // Exported image style: paragraph_carousel_2340x1170.
+  $styles['paragraph_carousel_2340x1170'] = array(
+    'label' => 'Paragraph carousel - fit within 2340x1170',
     'effects' => array(
       12 => array(
         'name' => 'image_scale',
         'data' => array(
-          'width' => 1200,
-          'height' => 600,
+          'width' => 2340,
+          'height' => 1170,
           'upscale' => 0,
         ),
         'weight' => 1,
@@ -135,15 +135,15 @@ function paragraph_page_image_default_styles() {
     ),
   );
 
-  // Exported image style: paragraph_carousel_600x600.
-  $styles['paragraph_carousel_600x600'] = array(
-    'label' => 'Paragraph carousel - fit within 600x600',
+  // Exported image style: paragraph_carousel_1200x1200.
+  $styles['paragraph_carousel_1200x1200'] = array(
+    'label' => 'Paragraph carousel - fit within 1200x1200',
     'effects' => array(
       14 => array(
         'name' => 'image_scale',
         'data' => array(
-          'width' => 600,
-          'height' => 600,
+          'width' => 1200,
+          'height' => 1200,
           'upscale' => 0,
         ),
         'weight' => 1,
