@@ -131,7 +131,7 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
 .paragraphs-items,
 .paragraphs-item {
   clear: both;
-  margin: 2em 0;
+  margin: 0;
 }
 
 /* Fix for inconsistent line heights of DOOOOOOM. */
