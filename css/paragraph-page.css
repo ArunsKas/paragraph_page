@@ -796,3 +796,11 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
 /*.paragraphs-item.paragraphs-item--images .field-item:nth-child(2) {*/
 /*display: block;*/
 /*}*/
+
+/* Pad text paragraphs. */
+.paragraphs-item--large-quote-intro-text,
+.paragraphs-item--two-three-or-four-column-wysiwyg {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
