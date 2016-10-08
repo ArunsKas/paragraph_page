@@ -376,8 +376,8 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
   color: #2266ff;
 }
 
-.paragraphs-item--page-promo-banner .text-colour-pink a,
-.paragraphs-item--page-promo-banner .text-colour-blue a {
+.paragraphs-item--page-promo-banner .text-colour-pink a:hover,
+.paragraphs-item--page-promo-banner .text-colour-blue a:hover {
   text-decoration: underline;
 }
 
@@ -536,8 +536,7 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
   color: #fff;
 }
 
-.paragraphs-item--page-promo-banner .text-colour-white h2 a {
-  color: #fff;
+.paragraphs-item--page-promo-banner .text-colour-white h2 a:hover {
   text-decoration: underline;
 }
 
