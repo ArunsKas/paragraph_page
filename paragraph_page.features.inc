@@ -74,6 +74,22 @@ function paragraph_page_image_default_styles() {
     ),
   );
 
+  // Exported image style: paragraph-image-with-text-1560px.
+  $styles['paragraph-image-with-text-1560px'] = array(
+    'label' => 'Paragraph image with text - fit within 1560x1560',
+    'effects' => array(
+      2 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 1560,
+          'height' => 1560,
+          'upscale' => 0,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
   // Exported image style: paragraph-promo-image-non-retina.
   $styles['paragraph-promo-image-non-retina'] = array(
     'label' => 'Paragraph promo image - non-retina',

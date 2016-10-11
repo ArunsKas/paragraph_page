@@ -3700,7 +3700,7 @@ function paragraph_page_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => 'paragraph_promo_image_4to3',
+          'image_style' => 'paragraph-image-with-text-1560px',
         ),
         'type' => 'image',
         'weight' => 0,
