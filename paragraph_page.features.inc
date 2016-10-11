@@ -135,22 +135,6 @@ function paragraph_page_image_default_styles() {
     ),
   );
 
-  // Exported image style: paragraph_carousel_2340x1170.
-  $styles['paragraph_carousel_2340x1170'] = array(
-    'label' => 'Paragraph carousel - fit within 2340x1170',
-    'effects' => array(
-      12 => array(
-        'name' => 'image_scale',
-        'data' => array(
-          'width' => 2340,
-          'height' => 1170,
-          'upscale' => 0,
-        ),
-        'weight' => 1,
-      ),
-    ),
-  );
-
   // Exported image style: paragraph_carousel_1200x1200.
   $styles['paragraph_carousel_1200x1200'] = array(
     'label' => 'Paragraph carousel - fit within 1200x1200',
@@ -160,6 +144,38 @@ function paragraph_page_image_default_styles() {
         'data' => array(
           'width' => 1200,
           'height' => 1200,
+          'upscale' => 0,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: paragraph_carousel_1200x600.
+  $styles['paragraph_carousel_1200x600'] = array(
+    'label' => 'Paragraph carousel - fit within 1200x600',
+    'effects' => array(
+      1 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 1200,
+          'height' => 600,
+          'upscale' => 0,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  // Exported image style: paragraph_carousel_2340x1170.
+  $styles['paragraph_carousel_2340x1170'] = array(
+    'label' => 'Paragraph carousel - fit within 2340x1170',
+    'effects' => array(
+      12 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 2340,
+          'height' => 1170,
           'upscale' => 0,
         ),
         'weight' => 1,
