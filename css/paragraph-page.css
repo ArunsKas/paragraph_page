@@ -687,12 +687,12 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
 }
 
 .paragraphs-item--image-carousel .carousel-caption {
-  padding-bottom: 25px;
+  padding-bottom: 45px;
 }
 
 @media (min-width: 768px) {
   .paragraphs-item--image-carousel .carousel-caption {
-    padding-bottom: 40px;
+    padding-bottom: 70px;
   }
 }
 
