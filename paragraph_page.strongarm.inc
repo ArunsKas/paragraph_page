@@ -586,7 +586,7 @@ function paragraph_page_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'pathauto_node_paragraph_page_pattern';
-  $strongarm->value = '[node:menu-link:parent]/[node:field_parapg_url_slug]';
+  $strongarm->value = '[node:menu-link:parent:url:path]/[node:field_parapg_url_slug]';
   $export['pathauto_node_paragraph_page_pattern'] = $strongarm;
 
   $strongarm = new stdClass();
