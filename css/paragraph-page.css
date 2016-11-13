@@ -763,6 +763,11 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
   font-family: Georgia, "Times New Roman", Times, serif;
 }
 
+.paragraphs-item.paragraphs-item--large-quote-intro-text-style-intro-text {
+  font-size: 2em;
+  color: #666;
+}
+
 /* Caption styles for videos, audio, images, etc. */
 .paragraphs-item .paragraphs-item--images-caption figcaption,
 .paragraphs-item .video-embed-description {
