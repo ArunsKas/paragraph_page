@@ -756,6 +756,12 @@ body.node-type-paragraph-page .main-container.container > section.col-lg-12 {
   font-weight: bold;
 }
 
+.paragraphs-item.paragraphs-item--large-quote-intro-text-style-quote,
+.paragraphs-item.paragraphs-item--large-quote-intro-text-style-intro-text {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
 .paragraphs-item.paragraphs-item--large-quote-intro-text-style-quote {
   font-size: 2em;
   font-style: italic;
