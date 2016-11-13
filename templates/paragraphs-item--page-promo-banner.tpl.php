@@ -28,7 +28,7 @@ foreach (element_children($content['field_paragraph_text_overlays']) as $field_p
 
   // Do we have a link?
   if (array_key_exists('field_paragraph_link_to_page', $field_paragraph_text_overlay_element)) {
-    $link_tag_open = '<a href="' . url($field_paragraph_text_overlay_element['field_paragraph_link_to_page']['#items'][0]['url']) . '">';
+    $link_tag_open = '<a href="' . $field_paragraph_text_overlay_element['field_paragraph_link_to_page']['#items'][0]['url'] . '">';
     $link_tag_close = '</a>';
   }
 
