@@ -17,6 +17,9 @@ function paragraph_page_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_carousel_slide_img_desktop',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'global_block_settings' => 1,
     'indexes' => array(
       'fid' => array(
@@ -142,11 +145,15 @@ function paragraph_page_field_default_field_bases() {
       'revision_id' => array(
         0 => 'revision_id',
       ),
+      'value' => array(
+        0 => 'value',
+      ),
     ),
     'locked' => 0,
     'module' => 'field_collection',
     'settings' => array(
       'hide_blank_items' => 1,
+      'hide_initial_item' => FALSE,
       'path' => '',
     ),
     'translatable' => 0,
@@ -495,7 +502,8 @@ function paragraph_page_field_default_field_bases() {
     'module' => 'list',
     'settings' => array(
       'allowed_values' => array(
-        'h2' => 'Heading 2 (largest)',
+        'h1' => 'Heading 1 (largest)',
+        'h2' => 'Heading 2',
         'h3' => 'Heading 3',
         'h4' => 'Heading 4',
         'h5' => 'Heading 5',
@@ -622,11 +630,15 @@ function paragraph_page_field_default_field_bases() {
       'revision_id' => array(
         0 => 'revision_id',
       ),
+      'value' => array(
+        0 => 'value',
+      ),
     ),
     'locked' => 0,
     'module' => 'field_collection',
     'settings' => array(
       'hide_blank_items' => 1,
+      'hide_initial_item' => FALSE,
       'path' => '',
     ),
     'translatable' => 0,
@@ -894,11 +906,15 @@ function paragraph_page_field_default_field_bases() {
       'revision_id' => array(
         0 => 'revision_id',
       ),
+      'value' => array(
+        0 => 'value',
+      ),
     ),
     'locked' => 0,
     'module' => 'field_collection',
     'settings' => array(
       'hide_blank_items' => 1,
+      'hide_initial_item' => FALSE,
       'path' => '',
     ),
     'translatable' => 0,
@@ -912,6 +928,9 @@ function paragraph_page_field_default_field_bases() {
     'deleted' => 0,
     'entity_types' => array(),
     'field_name' => 'field_paragraph_title',
+    'field_permissions' => array(
+      'type' => 0,
+    ),
     'global_block_settings' => 1,
     'indexes' => array(
       'format' => array(
@@ -1126,11 +1145,15 @@ function paragraph_page_field_default_field_bases() {
       'revision_id' => array(
         0 => 'revision_id',
       ),
+      'value' => array(
+        0 => 'value',
+      ),
     ),
     'locked' => 0,
     'module' => 'field_collection',
     'settings' => array(
       'hide_blank_items' => 1,
+      'hide_initial_item' => FALSE,
       'path' => '',
     ),
     'translatable' => 0,
@@ -1868,11 +1891,15 @@ function paragraph_page_field_default_field_bases() {
       'revision_id' => array(
         0 => 'revision_id',
       ),
+      'value' => array(
+        0 => 'value',
+      ),
     ),
     'locked' => 0,
     'module' => 'field_collection',
     'settings' => array(
       'hide_blank_items' => 1,
+      'hide_initial_item' => FALSE,
       'path' => '',
     ),
     'translatable' => 0,

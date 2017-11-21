@@ -15,7 +15,7 @@ function paragraph_page_user_default_permissions() {
     'name' => 'administer paragraphs bundles',
     'roles' => array(
       'administrator' => 'administrator',
-      'super-administrator' => 'super-administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'paragraphs',
   );
@@ -26,7 +26,7 @@ function paragraph_page_user_default_permissions() {
     'roles' => array(
       'client administrator' => 'client administrator',
       'editor' => 'editor',
-      'super-administrator' => 'super-administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -36,7 +36,7 @@ function paragraph_page_user_default_permissions() {
     'name' => 'delete any paragraph_page content',
     'roles' => array(
       'client administrator' => 'client administrator',
-      'super-administrator' => 'super-administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -46,7 +46,7 @@ function paragraph_page_user_default_permissions() {
     'name' => 'delete own paragraph_page content',
     'roles' => array(
       'editor' => 'editor',
-      'super-administrator' => 'super-administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -56,7 +56,7 @@ function paragraph_page_user_default_permissions() {
     'name' => 'edit any paragraph_page content',
     'roles' => array(
       'client administrator' => 'client administrator',
-      'super-administrator' => 'super-administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -66,7 +66,7 @@ function paragraph_page_user_default_permissions() {
     'name' => 'edit own paragraph_page content',
     'roles' => array(
       'editor' => 'editor',
-      'super-administrator' => 'super-administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'node',
   );
@@ -77,7 +77,7 @@ function paragraph_page_user_default_permissions() {
     'roles' => array(
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
-      'super-administrator' => 'super-administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'search_config',
   );
@@ -90,7 +90,7 @@ function paragraph_page_user_default_permissions() {
       'authenticated user' => 'authenticated user',
       'client administrator' => 'client administrator',
       'editor' => 'editor',
-      'super-administrator' => 'super-administrator',
+      'administrator' => 'administrator',
     ),
     'module' => 'better_formats',
   );
