@@ -11,22 +11,18 @@ if (array_key_exists('field_paragraphs_caption', $content)) {
 }
 ?>
 
-<div class="paragraphs-item paragraphs-item--images">
+<div class="paragraphs-item paragraphs-item--images container">
   <div class="row">
-    <div class="container">
-      <?php //print render($content['field_paragraph_images']) ?>
+    <?php foreach (element_children($content['field_paragraph_images']) as $field_paragraph_image) { ?>
+      <div class="col-md-3 paragraphs-item--image">
+        <?php print render($content['field_paragraph_images'][$field_paragraph_image]) ?>
+      </div>
+    <?php } ?>
 
-      <?php foreach (element_children($content['field_paragraph_images']) as $field_paragraph_image) { ?>
-        <div class="col-md-3 paragraphs-item--image">
-          <?php print render($content['field_paragraph_images'][$field_paragraph_image]) ?>
-        </div>
-      <?php } ?>
-
-      <?php if (!empty($caption)): ?>
-        <div class="col-md-12 paragraphs-item--images-caption">
-          <?php print $caption ?>
-        </div>
-      <?php endif ?>
-    </div>
+    <?php if (!empty($caption)): ?>
+      <div class="col-md-12 paragraphs-item--images-caption">
+        <?php print $caption ?>
+      </div>
+    <?php endif ?>
   </div>
 </div>

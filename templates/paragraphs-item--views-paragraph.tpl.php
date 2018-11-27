@@ -5,12 +5,10 @@
  */
 ?>
 
-<div class="paragraphs-item paragraphs-item--views-paragraph">
+<div class="paragraphs-item paragraphs-item--views-paragraph container">
   <div class="row">
-    <div class="container">
-      <div class="col-md-12">
-        <?php print render($content) ?>
-      </div>
+    <div class="col-md-12">
+      <?php print render($content) ?>
     </div>
   </div>
 </div>

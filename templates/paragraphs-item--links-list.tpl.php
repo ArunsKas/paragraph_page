@@ -13,35 +13,34 @@ $column_class = 'col-sm-' . (12 / $columns);
 // Get the list of link array keys.
 $parapg_links_children = element_children($content['field_parapg_links']);
 
-// Work out how many items per column.
-$items_per_column = ceil(count($parapg_links_children) / $columns);
-
+// Create a counter.
+$counter = 0;
 ?>
 
-<div class="paragraphs-item paragraphs-item--links-list">
+<div class="paragraphs-item paragraphs-item--links-list container">
   <div class="row">
-    <div class="container">
-      <div class="<?php print $column_class ?>">
-        <?php $counter = 0 ?>
+    <?php
+    // Hey, phpstorm, why the hell are you splitting this foreach?!
+    foreach ($parapg_links_children
 
-        <?php foreach ($parapg_links_children as $field_parapg_link_key): ?>
-        <div class="links-list-item">
-          <?php print render($content['field_parapg_links'][$field_parapg_link_key]) ?>
-        </div>
+    as $field_parapg_link_key): ?>
 
-        <?php
-        // If this is the last item which should be in a column, and we're not
-        // at the end of the list, add a column class.
-        if (((($counter + 1) % $items_per_column) == 0) && (($counter + 1) < count($parapg_links_children))): ?>
-      </div>
-      <div class="<?php print $column_class ?>">
-        <?php endif ?>
-
-        <?php
-        // Increment our counter.
-        $counter++ ?>
-        <?php endforeach ?>
+    <div class="<?php print $column_class ?>">
+      <div class="links-list-item">
+        <?php print render($content['field_parapg_links'][$field_parapg_link_key]) ?>
       </div>
     </div>
+
+    <?php
+    // If this is the last item in the row, and we have further items to
+    // display, start a new row.
+    $counter++;
+
+    if ((($counter % $columns) == 0) && ($counter < count($parapg_links_children))): ?>
+  </div>
+  <div class="row">
+    <?php endif; ?>
+
+    <?php endforeach; ?>
   </div>
 </div>

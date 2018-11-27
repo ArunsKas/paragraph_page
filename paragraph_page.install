@@ -67,3 +67,10 @@ function paragraph_page_update_7004() {
     field_purge_batch(1);
   }
 }
+
+/**
+ * Enable the imagecache_autorotate module.
+ */
+function paragraph_page_update_7005() {
+  module_enable(['imagecache_autorotate']);
+}

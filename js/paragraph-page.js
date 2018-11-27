@@ -68,16 +68,20 @@ var Drupal = Drupal || {};
             anchorScrollPosition = anchorScrollPosition - scrollerMarginTop;
 
             var offsetFromTop = 0;
-            var belowElement = $scroller.data('below-element');
+            var belowElementSelector = $scroller.data('below-element');
 
-            if (belowElement.length > 0) {
-              var belowElement = $(belowElement);
+            if (belowElementSelector.length > 0) {
+              console.log(belowElementSelector, 'belowElementSelector');
+              var $belowElement = $(belowElementSelector);
 
               // Get the bottom position of the belowElement relative to the
               // _viewport_, rather than the page.
-              var belowElementBottom = belowElement[0].getBoundingClientRect().bottom;
+              if ($belowElement.length) {
+                console.log($belowElement, '$belowElement');
+                var belowElementBottom = $belowElement[0].getBoundingClientRect().bottom;
 
-              offsetFromTop = offsetFromTop + belowElementBottom;
+                offsetFromTop = offsetFromTop + belowElementBottom;
+              }
             }
 
             $scrollerClone.css({

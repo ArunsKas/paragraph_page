@@ -42,20 +42,30 @@ function paragraph_page_form_alter(&$form, &$form_state, $form_id) {
   // add a validate function to clean up the contents of
   // $form_state['values']['field_parapg_url_slug'].
   if (!empty($form['#node_edit_form'])) {
-    // When we have a URL slug field, default to setting an automagic URL.
+    // If we have something in the URL alias field, un-tick the automatic
+    // alias checkbox.
+    if (!empty($form['path']['alias']['#default_value'])) {
+      $form['path']['pathauto']['#default_value'] = FALSE;
+    }
+
+    // If the node has a URL slug...
     if (!empty($form['field_parapg_url_slug'])) {
-      $form['path']['pathauto']['#default_value']
-        = $form['path']['pathauto']['#value'] = TRUE;
+      // When we have something in the URL slug field and we don't already have a
+      // path alias, default to setting an automagic URL.
+      if (empty($form['path']['alias']['#default_value']) && !empty($form['field_parapg_url_slug'][LANGUAGE_NONE][0]['value']['#default_value'])) {
+        //$form['path']['pathauto']['#default_value'] = TRUE;
+        $form['path']['alias']['#default_value'] = $form['field_parapg_url_slug'][LANGUAGE_NONE][0]['value']['#default_value'];
 
-      // Don't prevent editors from setting the URL.
-//      $form['path']['pathauto']['#disabled'] = TRUE;
+        // Don't prevent editors from setting the URL.
+        //      $form['path']['pathauto']['#disabled'] = TRUE;
 
-      $form['path']['pathauto']['#description'] = t('To set the URL for this page, you should set the "URL Slug" field at the top of this page rather than setting the URL here. If you set the URL manually here, the URL slug will be ignored.');
+        $form['path']['pathauto']['#description'] = t('To set the URL for this page, you should set the "URL Slug" field at the top of this page rather than setting the URL here. If you set the URL manually here, the URL slug will be ignored.');
+      }
     }
 
     // On node edit forms, allow the passing of a plid attribute in the URL
     // to pre-select a menu item.
-    if (array_key_exists('menu', $form) && isset($_GET['plid'])) {
+    if (!empty($form['menu']) && !empty($_GET['plid'])) {
       // Get the plid.
       $plid = intval($_GET['plid']);
 
@@ -601,6 +611,12 @@ function paragraph_page_theme() {
   $theme['paragraphs_item__company_contact_info'] = [
     'render element' => 'elements',
     'template' => 'paragraphs-item--company-contact-info',
+    'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
+  ];
+
+  $theme['paragraphs_item__image_with_optional_caption'] = [
+    'render element' => 'elements',
+    'template' => 'paragraphs-item--image-with-optional-caption',
     'path' => drupal_get_path('module', 'paragraph_page') . '/templates',
   ];
 

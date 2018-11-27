@@ -1346,7 +1346,6 @@ function paragraph_page_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'paragraphs',
         'settings' => array(
-          'conditions' => array(),
           'view_mode' => 'full',
         ),
         'type' => 'paragraphs_view',
@@ -1427,7 +1426,7 @@ function paragraph_page_field_default_field_instances() {
       'module' => 'paragraphs',
       'settings' => array(),
       'type' => 'paragraphs_embed',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -1448,7 +1447,7 @@ function paragraph_page_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -1489,7 +1488,53 @@ function paragraph_page_field_default_field_instances() {
         'size' => 90,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'node-paragraph_page-field_parapg_tags'.
+  $field_instances['node-paragraph_page-field_parapg_tags'] = array(
+    'bundle' => 'paragraph_page',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'You can "tag" a page with one or more keywords. You can then use these tags to create customised content lists. For example, if you tag this page with "news", and then create a customised content listing which shows all pages tagged with "news", this page will be shown - you can use this to build custom lists of content such as news, photo galleries, press releases, etc. Separate each tag with a comma. We recommend only using alphanumeric characters and avoiding spaces for consistency - for example "FlyingMonkeys2018" rather than "Flying Monkeys: 2018".',
+    'display' => array(
+      'cck_blocks' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_parapg_tags',
+    'label' => 'Tags',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'taxonomy',
+      'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 3,
     ),
   );
 
@@ -1516,7 +1561,7 @@ function paragraph_page_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -2085,6 +2130,66 @@ function paragraph_page_field_default_field_instances() {
   );
 
   // Exported field_instance:
+  // 'paragraphs_item-customisable_content_listing-field_parapg_contentlist_tags'.
+  $field_instances['paragraphs_item-customisable_content_listing-field_parapg_contentlist_tags'] = array(
+    'bundle' => 'customisable_content_listing',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'If you would like to only show content which has been "tagged" with a particular tag, enter the tag here. For example, if you have a collection of pages tagged with "news", enter "news" here and only those pages will be shown.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 4,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_parapg_contentlist_tags',
+    'label' => 'Show content tagged with',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'full_html' => array(
+              'weight' => -10,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance:
   // 'paragraphs_item-customisable_content_listing-field_parapg_count'.
   $field_instances['paragraphs_item-customisable_content_listing-field_parapg_count'] = array(
     'bundle' => 'customisable_content_listing',
@@ -2143,7 +2248,7 @@ function paragraph_page_field_default_field_instances() {
     'bundle' => 'customisable_content_listing',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'Enter the content type which you wish to display.',
+    'description' => 'Choose what type(s) of content you want to show. If you don\'t choose anything here, all content will be shown.',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2967,6 +3072,141 @@ function paragraph_page_field_default_field_instances() {
       'settings' => array(),
       'type' => 'field_collection_embed',
       'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'paragraphs_item-image_with_optional_caption-field_parapg_image_w_caption_cap'.
+  $field_instances['paragraphs_item-image_with_optional_caption-field_parapg_image_w_caption_cap'] = array(
+    'bundle' => 'image_with_optional_caption',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Display an optional caption underneath your image.',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 1,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_parapg_image_w_caption_cap',
+    'label' => 'Caption',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'full_html' => 'full_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'full_html' => array(
+              'weight' => -10,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'paragraphs_item-image_with_optional_caption-field_parapg_image_w_caption_img'.
+  $field_instances['paragraphs_item-image_with_optional_caption-field_parapg_image_w_caption_img'] = array(
+    'bundle' => 'image_with_optional_caption',
+    'deleted' => 0,
+    'description' => 'If your image is wider than the page content, it will be scaled down.',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'colorbox',
+        'settings' => array(
+          'colorbox_caption' => 'none',
+          'colorbox_caption_custom' => '',
+          'colorbox_gallery' => 'page',
+          'colorbox_gallery_custom' => '',
+          'colorbox_image_style' => 'paragraph-fit-within-1200x1200',
+          'colorbox_multivalue_index' => NULL,
+          'colorbox_node_style' => 'up-to-600-high',
+          'colorbox_node_style_first' => '',
+        ),
+        'type' => 'colorbox',
+        'weight' => 0,
+      ),
+      'paragraphs_editor_preview' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'paragraphs_item',
+    'fences_wrapper' => 'div_div_div',
+    'field_name' => 'field_parapg_image_w_caption_img',
+    'label' => 'Image',
+    'required' => 1,
+    'settings' => array(
+      'alt_field' => 0,
+      'default_image' => 0,
+      'file_directory' => 'paragraph-page/image-with-caption',
+      'file_extensions' => 'png gif jpg jpeg',
+      'max_filesize' => '',
+      'max_resolution' => '',
+      'min_resolution' => '',
+      'title_field' => 0,
+      'user_register_form' => FALSE,
+      'wysiwyg_insert' => 0,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'media',
+      'settings' => array(
+        'allowed_schemes' => array(
+          'private' => 0,
+          'public' => 'public',
+        ),
+        'allowed_types' => array(
+          'audio' => 0,
+          'document' => 0,
+          'image' => 'image',
+          'video' => 0,
+        ),
+        'browser_plugins' => array(
+          'media_browser_plus--media_browser_my_files' => 0,
+          'media_browser_plus--media_browser_thumbnails' => 0,
+          'media_default--media_browser_1' => 0,
+          'media_default--media_browser_my_files' => 0,
+          'media_internet' => 0,
+          'upload' => 0,
+        ),
+      ),
+      'type' => 'media_generic',
+      'weight' => 1,
     ),
   );
 
@@ -4848,6 +5088,7 @@ function paragraph_page_field_default_field_instances() {
   t('Add one or more slides to this carousel. Each slide should contain an image to be shown on desktop-sized screens, an image for mobile screens (typically in portrait orientation), and an optional URL to another page on this site to link the images to. Images will be scaled to fit within a pre-defined size, so for consistency, you should ensure all desktop-sized images are the same dimensions, and that all mobile-sized images have equal dimensions, too.');
   t('Address');
   t('Below-images caption');
+  t('Caption');
   t('Carousel slides');
   t('Carousel width');
   t('Choose how wide the image should be in relation to the full-width of the page. Note that the image will be placed above or below the text on smaller screens such as mobile phones.');
@@ -4856,6 +5097,7 @@ function paragraph_page_field_default_field_instances() {
   t('Choose what font style should be applied to this paragraph; you can choose either "intro text" style, which is a non-italicised serif font, or "quote style", which is a serif font such as Times in italics.');
   t('Choose what kind of contact information this is.');
   t('Choose what ratio this image should be cropped to. Images will scale up to the window\'s width, or the image\'s full width if smaller than the window width.');
+  t('Choose what type(s) of content you want to show. If you don\'t choose anything here, all content will be shown.');
   t('Choose whether this carousel should be the same width as the page content, or the full width of the window?');
   t('Choose which side the image should be shown on.');
   t('Column 1 content');
@@ -4866,12 +5108,12 @@ function paragraph_page_field_default_field_instances() {
   t('Contact information');
   t('Date');
   t('Desktop-sized image');
+  t('Display an optional caption underneath your image.');
   t('Divide links into columns');
   t('E-mail address');
   t('E-mail title');
   t('Enter contact information here. For each item, choose whether it is a telephone number, e-mail address, web address, or a postal address. Web addresses and e-mail addresses will be displayed as links; telephone numbers will be displayed as links on mobile devices to allow click-to-call. Postal addresses can be linked to a Google Maps search page.');
   t('Enter one or more URLs which point to a Soundcloud audio page.');
-  t('Enter the content type which you wish to display.');
   t('Enter the e-mail address. This will be shown as a "mailto" link which will try to open the visitor\'s e-mail client.');
   t('Enter the name of this address to be displayed alongside the address, for example "Main office".');
   t('Enter the phone number. Be careful to ensure it is formatted correctly - this field will not check that you have formatted the number correctly because of the wide variety of ways in which numbers can be displayed.');
@@ -4888,6 +5130,8 @@ function paragraph_page_field_default_field_instances() {
   t('If both an image and video is supplied, the video will take precedence.');
   t('If more items of content are found than the total number you wish to display, you can show links below the content to allow site users to view more results.');
   t('If you want to create a jump link but not show it at the top of the page, un-tick this box.');
+  t('If you would like to only show content which has been "tagged" with a particular tag, enter the tag here. For example, if you have a collection of pages tagged with "news", enter "news" here and only those pages will be shown.');
+  t('If your image is wider than the page content, it will be scaled down.');
   t('Image');
   t('Image ratio');
   t('Image side');
@@ -4928,6 +5172,7 @@ function paragraph_page_field_default_field_instances() {
   t('Should this node always be allowed to expand to the full page width, or should it be limited to the normal content width on larger screens, with left and right margins?');
   t('Show a pager?');
   t('Show content of type');
+  t('Show content tagged with');
   t('Show each slide for how many seconds?');
   t('Show forward/back controls?');
   t('Show how many items?');
@@ -4942,6 +5187,7 @@ function paragraph_page_field_default_field_instances() {
   t('Soundcloud URL');
   t('Style');
   t('Subtitle');
+  t('Tags');
   t('Telephone/fax number');
   t('Text');
   t('Text and background colours');
@@ -4964,6 +5210,7 @@ function paragraph_page_field_default_field_instances() {
   t('View to display');
   t('WYSIWYG');
   t('Web address');
+  t('You can "tag" a page with one or more keywords. You can then use these tags to create customised content lists. For example, if you tag this page with "news", and then create a customised content listing which shows all pages tagged with "news", this page will be shown - you can use this to build custom lists of content such as news, photo galleries, press releases, etc. Separate each tag with a comma. We recommend only using alphanumeric characters and avoiding spaces for consistency - for example "FlyingMonkeys2018" rather than "Flying Monkeys: 2018".');
   t('You can add an optional sub-title which will be shown bottom-centre on your slide, below any slide title, if entered.');
   t('You can add an optional title which will be shown in the bottom-centre of the slide. Be careful not to enter a title which will be too large to fit inside the carousel image on mobile and desktop displays.');
   t('You can configure up to three text overlays. If you have more than one overlay, each overlay is full-height and occupies either half or one-third of the promo box\'s width. The position of the text overlay is relative to the position of its part of the promo box, so if you set the second of three text overlays to be bottom-right positioned, it will sit in the bottom-right of the middle third of the promo box.');

@@ -42,7 +42,7 @@ function paragraph_page_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'autosave_paragraph_page';
-  $strongarm->value = 1;
+  $strongarm->value = TRUE;
   $export['autosave_paragraph_page'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -179,19 +179,19 @@ function paragraph_page_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'metatags' => array(
-          'weight' => '8',
+          'weight' => '7',
         ),
         'title' => array(
           'weight' => '0',
         ),
         'path' => array(
-          'weight' => '7',
-        ),
-        'xmlsitemap' => array(
           'weight' => '6',
         ),
+        'xmlsitemap' => array(
+          'weight' => '5',
+        ),
         'redirect' => array(
-          'weight' => '9',
+          'weight' => '8',
         ),
       ),
       'display' => array(

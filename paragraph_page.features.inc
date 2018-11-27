@@ -46,14 +46,19 @@ function paragraph_page_image_default_styles() {
   $styles['paragraph-fit-within-1200x1200'] = array(
     'label' => 'Paragraph - fit within 1200x1200',
     'effects' => array(
-      27 => array(
+      4 => array(
+        'name' => 'imagecache_autorotate',
+        'data' => array(),
+        'weight' => -10,
+      ),
+      3 => array(
         'name' => 'image_scale',
         'data' => array(
           'width' => 1200,
           'height' => 1200,
           'upscale' => 0,
         ),
-        'weight' => 1,
+        'weight' => -9,
       ),
     ),
   );
@@ -62,14 +67,19 @@ function paragraph_page_image_default_styles() {
   $styles['paragraph-fit-within-600x600'] = array(
     'label' => 'Paragraph - fit within 600x600',
     'effects' => array(
-      26 => array(
+      6 => array(
+        'name' => 'imagecache_autorotate',
+        'data' => array(),
+        'weight' => -10,
+      ),
+      5 => array(
         'name' => 'image_scale',
         'data' => array(
           'width' => 600,
           'height' => 600,
           'upscale' => 0,
         ),
-        'weight' => 1,
+        'weight' => -9,
       ),
     ),
   );
@@ -78,14 +88,19 @@ function paragraph_page_image_default_styles() {
   $styles['paragraph-image-with-text-1560px'] = array(
     'label' => 'Paragraph image with text - fit within 1560x1560',
     'effects' => array(
-      2 => array(
+      8 => array(
+        'name' => 'imagecache_autorotate',
+        'data' => array(),
+        'weight' => -10,
+      ),
+      7 => array(
         'name' => 'image_scale',
         'data' => array(
           'width' => 1560,
           'height' => 1560,
           'upscale' => 0,
         ),
-        'weight' => 1,
+        'weight' => -9,
       ),
     ),
   );
@@ -94,13 +109,18 @@ function paragraph_page_image_default_styles() {
   $styles['paragraph-promo-image-non-retina'] = array(
     'label' => 'Paragraph promo image - non-retina',
     'effects' => array(
-      29 => array(
+      10 => array(
+        'name' => 'imagecache_autorotate',
+        'data' => array(),
+        'weight' => -10,
+      ),
+      9 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 1170,
           'height' => 400,
         ),
-        'weight' => 1,
+        'weight' => -9,
       ),
     ),
   );
@@ -109,13 +129,18 @@ function paragraph_page_image_default_styles() {
   $styles['paragraph-promo-image-retina'] = array(
     'label' => 'Paragraph promo image - retina',
     'effects' => array(
-      28 => array(
+      12 => array(
+        'name' => 'imagecache_autorotate',
+        'data' => array(),
+        'weight' => -10,
+      ),
+      11 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 2340,
           'height' => 800,
         ),
-        'weight' => 1,
+        'weight' => -9,
       ),
     ),
   );
@@ -124,13 +149,18 @@ function paragraph_page_image_default_styles() {
   $styles['paragraph-scale-crop-300x300'] = array(
     'label' => 'Paragraph - scale and crop 300x300',
     'effects' => array(
-      1 => array(
+      14 => array(
+        'name' => 'imagecache_autorotate',
+        'data' => array(),
+        'weight' => -10,
+      ),
+      13 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 300,
           'height' => 300,
         ),
-        'weight' => 1,
+        'weight' => -9,
       ),
     ),
   );
@@ -139,14 +169,19 @@ function paragraph_page_image_default_styles() {
   $styles['paragraph_carousel_1200x1200'] = array(
     'label' => 'Paragraph carousel - fit within 1200x1200',
     'effects' => array(
-      14 => array(
+      16 => array(
+        'name' => 'imagecache_autorotate',
+        'data' => array(),
+        'weight' => -10,
+      ),
+      15 => array(
         'name' => 'image_scale',
         'data' => array(
           'width' => 1200,
           'height' => 1200,
           'upscale' => 0,
         ),
-        'weight' => 1,
+        'weight' => -9,
       ),
     ),
   );
@@ -155,14 +190,19 @@ function paragraph_page_image_default_styles() {
   $styles['paragraph_carousel_1200x600'] = array(
     'label' => 'Paragraph carousel - fit within 1200x600',
     'effects' => array(
-      1 => array(
+      18 => array(
+        'name' => 'imagecache_autorotate',
+        'data' => array(),
+        'weight' => -10,
+      ),
+      17 => array(
         'name' => 'image_scale',
         'data' => array(
           'width' => 1200,
           'height' => 600,
           'upscale' => 0,
         ),
-        'weight' => 1,
+        'weight' => -9,
       ),
     ),
   );
@@ -171,14 +211,19 @@ function paragraph_page_image_default_styles() {
   $styles['paragraph_carousel_2340x1170'] = array(
     'label' => 'Paragraph carousel - fit within 2340x1170',
     'effects' => array(
-      12 => array(
+      20 => array(
+        'name' => 'imagecache_autorotate',
+        'data' => array(),
+        'weight' => -10,
+      ),
+      19 => array(
         'name' => 'image_scale',
         'data' => array(
           'width' => 2340,
           'height' => 1170,
           'upscale' => 0,
         ),
-        'weight' => 1,
+        'weight' => -9,
       ),
     ),
   );
@@ -187,13 +232,18 @@ function paragraph_page_image_default_styles() {
   $styles['paragraph_promo_image_16to9'] = array(
     'label' => 'Paragraph promo image - 16:9 ratio',
     'effects' => array(
-      9 => array(
+      22 => array(
+        'name' => 'imagecache_autorotate',
+        'data' => array(),
+        'weight' => -10,
+      ),
+      21 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 1600,
           'height' => 900,
         ),
-        'weight' => 1,
+        'weight' => -9,
       ),
     ),
   );
@@ -202,13 +252,18 @@ function paragraph_page_image_default_styles() {
   $styles['paragraph_promo_image_1to1'] = array(
     'label' => 'Paragraph promo image - 1:1 ratio',
     'effects' => array(
-      5 => array(
+      24 => array(
+        'name' => 'imagecache_autorotate',
+        'data' => array(),
+        'weight' => -10,
+      ),
+      23 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 1600,
           'height' => 1600,
         ),
-        'weight' => 1,
+        'weight' => -9,
       ),
     ),
   );
@@ -217,13 +272,18 @@ function paragraph_page_image_default_styles() {
   $styles['paragraph_promo_image_22to10'] = array(
     'label' => 'Paragraph promo image - 2.2:1 ratio',
     'effects' => array(
-      10 => array(
+      26 => array(
+        'name' => 'imagecache_autorotate',
+        'data' => array(),
+        'weight' => -10,
+      ),
+      25 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 1600,
           'height' => 730,
         ),
-        'weight' => 1,
+        'weight' => -9,
       ),
     ),
   );
@@ -232,13 +292,18 @@ function paragraph_page_image_default_styles() {
   $styles['paragraph_promo_image_2to1'] = array(
     'label' => 'Paragraph promo image - 2:1 ratio',
     'effects' => array(
-      6 => array(
+      28 => array(
+        'name' => 'imagecache_autorotate',
+        'data' => array(),
+        'weight' => -10,
+      ),
+      27 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 1600,
           'height' => 800,
         ),
-        'weight' => 1,
+        'weight' => -9,
       ),
     ),
   );
@@ -247,13 +312,18 @@ function paragraph_page_image_default_styles() {
   $styles['paragraph_promo_image_3to1'] = array(
     'label' => 'Paragraph promo image - 3:1 ratio',
     'effects' => array(
-      11 => array(
+      30 => array(
+        'name' => 'imagecache_autorotate',
+        'data' => array(),
+        'weight' => -10,
+      ),
+      29 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 1600,
           'height' => 530,
         ),
-        'weight' => 1,
+        'weight' => -9,
       ),
     ),
   );
@@ -262,13 +332,18 @@ function paragraph_page_image_default_styles() {
   $styles['paragraph_promo_image_3to4'] = array(
     'label' => 'Paragraph promo image - 3:4 ratio',
     'effects' => array(
-      8 => array(
+      32 => array(
+        'name' => 'imagecache_autorotate',
+        'data' => array(),
+        'weight' => -10,
+      ),
+      31 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 1200,
           'height' => 1600,
         ),
-        'weight' => 1,
+        'weight' => -9,
       ),
     ),
   );
@@ -277,13 +352,18 @@ function paragraph_page_image_default_styles() {
   $styles['paragraph_promo_image_4to1'] = array(
     'label' => 'Paragraph promo image - 4:1 ratio',
     'effects' => array(
-      12 => array(
+      34 => array(
+        'name' => 'imagecache_autorotate',
+        'data' => array(),
+        'weight' => -10,
+      ),
+      33 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 1600,
           'height' => 400,
         ),
-        'weight' => 1,
+        'weight' => -9,
       ),
     ),
   );
@@ -292,13 +372,39 @@ function paragraph_page_image_default_styles() {
   $styles['paragraph_promo_image_4to3'] = array(
     'label' => 'Paragraph promo image - 4:3 ratio',
     'effects' => array(
-      7 => array(
+      36 => array(
+        'name' => 'imagecache_autorotate',
+        'data' => array(),
+        'weight' => -10,
+      ),
+      35 => array(
         'name' => 'image_scale_and_crop',
         'data' => array(
           'width' => 1600,
           'height' => 1200,
         ),
-        'weight' => 1,
+        'weight' => -9,
+      ),
+    ),
+  );
+
+  // Exported image style: up-to-600-high.
+  $styles['up-to-600-high'] = array(
+    'label' => 'Paragraph - less than 600 high',
+    'effects' => array(
+      2 => array(
+        'name' => 'imagecache_autorotate',
+        'data' => array(),
+        'weight' => -10,
+      ),
+      1 => array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => '',
+          'height' => 600,
+          'upscale' => 0,
+        ),
+        'weight' => -9,
       ),
     ),
   );
@@ -382,6 +488,11 @@ function paragraph_page_paragraphs_info() {
     'image_carousel' => array(
       'name' => 'Carousel of images with links and left/right controls',
       'bundle' => 'image_carousel',
+      'locked' => '1',
+    ),
+    'image_with_optional_caption' => array(
+      'name' => 'Image with optional caption',
+      'bundle' => 'image_with_optional_caption',
       'locked' => '1',
     ),
     'images' => array(

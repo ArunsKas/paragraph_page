@@ -44,14 +44,12 @@ foreach (element_children($content['field_parapragh_promo_block']) as $field_par
     $text = '<p class="text">' . $field_paragraph_promo_block_element['field_paragraph_promo_text']['#items'][0]['safe_value'] . '</p>';
   }
 
-
-  $field_paragraph_promo_blocks[$field_paragraph_promo_block] = array(
+  $field_paragraph_promo_blocks[$field_paragraph_promo_block] = [
     'title' => $title,
     'category' => $category,
     'image_src' => $image_src,
     'text' => $text,
-  );
-
+  ];
 }
 
 ?>
@@ -60,17 +58,15 @@ foreach (element_children($content['field_parapragh_promo_block']) as $field_par
   <h6>You may also like:</h6>
 </div>
 
-<div class="paragraphs-item paragraphs-item--promo-with-image">
+<div class="paragraphs-item paragraphs-item--promo-with-image container">
   <div class="row">
-    <div class="container">
-      <?php foreach ($field_paragraph_promo_blocks as $field_paragraph_promo_block): ?>
-        <div class="promo-block col-xs-12 col-sm-4">
-          <?php print $field_paragraph_promo_block['category']; ?>
-          <?php print $field_paragraph_promo_block['title']; ?>
-          <img src="<?php print $field_paragraph_promo_block['image_src']; ?>">
-          <?php print $field_paragraph_promo_block['text']; ?>
-        </div>
-      <?php endforeach ?>
-    </div>
+    <?php foreach ($field_paragraph_promo_blocks as $field_paragraph_promo_block): ?>
+      <div class="promo-block col-xs-12 col-sm-4">
+        <?php print $field_paragraph_promo_block['category']; ?>
+        <?php print $field_paragraph_promo_block['title']; ?>
+        <img src="<?php print $field_paragraph_promo_block['image_src']; ?>">
+        <?php print $field_paragraph_promo_block['text']; ?>
+      </div>
+    <?php endforeach ?>
   </div>
 </div>

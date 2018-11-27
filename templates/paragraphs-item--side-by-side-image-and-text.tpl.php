@@ -11,33 +11,31 @@ $text_class = 'col-md-' . (12 - $image_cols);
 
 ?>
 
-<div class="paragraphs-item paragraphs-item--side-by-side-image-text">
+<div class="paragraphs-item paragraphs-item--side-by-side-image-text container">
   <div class="row">
-    <div class="container">
-      <?php
-      // Are we showing image on the left?
-      if ($content['field_parapg_image_side']['#items'][0]['value'] == 'left'): ?>
-        <div class="image <?php print $image_class ?>">
-          <?php print render($content['field_parapg_image']) ?>
-        </div>
-      <?php endif ?>
-
-      <div class="text <?php print $text_class ?>">
-        <?php print render($content['field_parapg_text']) ?>
+    <?php
+    // Are we showing image on the left?
+    if ($content['field_parapg_image_side']['#items'][0]['value'] == 'left'): ?>
+      <div class="image <?php print $image_class ?>">
+        <?php print render($content['field_parapg_image']) ?>
       </div>
+    <?php endif ?>
 
-      <?php
-      // Are we showing image on the right?
-      if ($content['field_parapg_image_side']['#items'][0]['value'] == 'right'
-          && empty($content['field_parapg_youtube_video_url'])): ?>
-        <div class="image <?php print $image_class ?>">
-          <?php print render($content['field_parapg_image']) ?>
-        </div>
-      <?php else: ?>
-        <div class="video <?php print $image_class ?>">
-          <?php print render($content['field_parapg_youtube_video_url']);?>
-        </div>
-      <?php endif ?>
+    <div class="text <?php print $text_class ?>">
+      <?php print render($content['field_parapg_text']) ?>
     </div>
+
+    <?php
+    // Are we showing image on the right?
+    if ($content['field_parapg_image_side']['#items'][0]['value'] == 'right'
+      && empty($content['field_parapg_youtube_video_url'])): ?>
+      <div class="image <?php print $image_class ?>">
+        <?php print render($content['field_parapg_image']) ?>
+      </div>
+    <?php else: ?>
+      <div class="video <?php print $image_class ?>">
+        <?php print render($content['field_parapg_youtube_video_url']); ?>
+      </div>
+    <?php endif ?>
   </div>
 </div>
